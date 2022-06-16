@@ -1,12 +1,14 @@
 name: "WIP - Do Not Merge"
 on:
   pull_request:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened, edited, labeled, unlabeled]
 
 jobs:
-  wip:
+  check_wip:
     runs-on: ubuntu-latest
     steps:
-      - uses: wip/action@v1.1.0
+      - name: Block if WIP PR
+        uses: ParanoidBeing/action-wip-blocker@v0.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BLOCK_LIST: "WIP"
