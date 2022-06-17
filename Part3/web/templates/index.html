@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Nerd Express - Intelligent Vending Machines</title>
-</head>
-<body style="padding:20px">
-{% if cursor %}
-	<table border="2px">
-		<thead>
-			<tr>
-				<th>EAN </th>
-				<th>Categoria </th>
-				<th>Descrição </th>
-			</tr>
-</thead>
-<tbody>
-{% for record in cursor %}
-<tr>
-<td>{{ record[0] }} </td>
-<td>{{ record[1] }} </td>
-<td>{{ record[2] }} </td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
-{% else %}
-<p> Erro: ao obter dados da base de dados! </p>
-{% endif %}
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nerd Express - Intelligent Vending Machines</title>
+  </head>
+  <body style="padding: 20px">
+    {% if cursor %}
+    <h3>Bem-vindo ao painel de Administração das máquinas Nerd-Express!</h3>
+    <h3>Este site está em desenvolvimento.</h3>
+    <p>versão 3.2.7</p>
+    <h2>Listagem de todos os produtos nas nossas máquinas:</h2>
+    <table border="2px">
+      <thead>
+        <tr>
+          <th>EAN</th>
+          <th>Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in cursor %}
+        <tr>
+          <td>{{ record[0] }}</td>
+          <td>{{ record[1] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>Erro: ao obter dados da base de dados!</p>
+    {% endif %}
+  </body>
 </html>
