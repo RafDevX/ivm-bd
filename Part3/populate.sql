@@ -128,9 +128,9 @@ INSERT INTO IVM(num_serie, fabricante) VALUES ('ABCD', 'lidl');
 
 INSERT INTO ponto_de_retalho(nome, distrito, concelho) VALUES ('Galp Oeiras', 'Lisboa', 'Oeiras');
 
-INSERT INTO intalada_em(num_serie, fabricante, local) VALUES ('ABCD', 'aldi', 'Galp Oeiras');
-INSERT INTO intalada_em(num_serie, fabricante, local) VALUES ('1234', 'aldi', 'Galp Oeiras');
-INSERT INTO intalada_em(num_serie, fabricante, local) VALUES ('ABCD', 'lidl', 'Galp Oeiras');
+INSERT INTO instalada_em(num_serie, fabricante, local) VALUES ('ABCD', 'aldi', 'Galp Oeiras');
+INSERT INTO instalada_em(num_serie, fabricante, local) VALUES ('1234', 'aldi', 'Galp Oeiras');
+INSERT INTO instalada_em(num_serie, fabricante, local) VALUES ('ABCD', 'lidl', 'Galp Oeiras');
 
 INSERT INTO categoria(nome) VALUES ('Bebidas');
 INSERT INTO categoria(nome) VALUES ('Barras Energéticas');
