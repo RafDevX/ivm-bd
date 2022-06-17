@@ -1,6 +1,6 @@
 DROP TABLE categoria CASCADE;
 DROP TABLE categoria_simples CASCADE;
-DROP TABLE super_category CASCADE;
+DROP TABLE super_categoria CASCADE;
 DROP TABLE tem_outra CASCADE;
 DROP TABLE produto CASCADE;
 DROP TABLE tem_categoria CASCADE;
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS instalada_em (
 CREATE TABLE IF NOT EXISTS prateleira (
 	nro INT NOT NULL,
 	num_serie VARCHAR(50) NOT NULL,
-	fabricante VARCHAR(50) NOT NULL, 
+	fabricante VARCHAR(50) NOT NULL,
 	altura INT NOT NULL,
 	nome VARCHAR(50) NOT NULL,
 	PRIMARY KEY(nro, num_serie, fabricante),
