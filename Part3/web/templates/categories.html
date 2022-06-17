@@ -10,6 +10,7 @@
       <thead>
         <tr>
           <th>Categoria</th>
+          <th>Listar</th>
           <th>Apagar</th>
         </tr>
       </thead>
@@ -17,6 +18,12 @@
         {% for record in cursor %}
         <tr>
           <td>{{ record[0] }}</td>
+          <td>
+            <a href="listsubcategories?category={{ record[0] }}"
+              >Listar Sub-Categorias
+            </a>
+          </td>
+
           <td>
             <a href="deletecategory?category={{ record[0] }}"
               >Apagar Categoria
