@@ -2,10 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Nerd Express - Categorias</title>
+    <title>Nerd Express | Categorias</title>
   </head>
   <body style="padding: 20px">
     {% if cursor %}
+    <h2>Lista de Categorias</h2>
     <table border="2px">
       <thead>
         <tr>
@@ -23,7 +24,6 @@
               >Listar Sub-Categorias
             </a>
           </td>
-
           <td>
             <a href="deletecategory?category={{ record[0] }}"
               >Apagar Categoria
@@ -33,6 +33,13 @@
         {% endfor %}
       </tbody>
     </table>
+    <br />
+    <a href="addcategory">Adicionar Categoria</a>
+    <br />
+    <h3>Links Rápidos</h3>
+    <ul>
+      <li><a href="/nerd-express.cgi/">Página Principal </a></li>
+    </ul>
     {% else %}
     <p>Erro: não foi possível obter dados da base de dados!</p>
     {% endif %}
