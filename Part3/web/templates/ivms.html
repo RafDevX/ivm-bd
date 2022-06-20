@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nerd Express | IVMs</title>
+  </head>
+  <body style="padding: 20px">
+    {% if cursor %}
+    <a href="/nerd-express.cgi/">Voltar </a>
+    <h2>Lista de IVMs</h2>
+    <table border="2px">
+      <thead>
+        <tr>
+          <th>Núm. Série</th>
+          <th>Fabricante</th>
+          <th>Listar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in cursor %}
+        <tr>
+          <td>{{ record[0] }}</td>
+          <td>{{ record[1] }}</td>
+          <td>
+            <a
+              href="replenishmentevents?serial={{ record[0] }}&manuf={{ record[1] }}"
+              >Listar eventos de reposição
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br />
+    <br />
+    <h3>Links Rápidos</h3>
+    <ul>
+      <li><a href="/nerd-express.cgi/">Página Principal </a></li>
+    </ul>
+    {% else %}
+    <p>Erro: não foi possível obter dados da base de dados!</p>
+    {% endif %}
+  </body>
+</html>
