@@ -55,8 +55,8 @@ def list_subcategories():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        query = "SELECT categoria FROM tem_outra WHERE super_categoria = '%s';"  % (category)
-        cursor.execute(query)
+        query = "SELECT categoria FROM tem_outra WHERE super_categoria = %s;"
+        cursor.execute(query, (category, ))
         return render_template("listsubcategories.html", cursor=cursor, params=request.args)
     except Exception as e:
         return str(e) #Renders a page with the error.
