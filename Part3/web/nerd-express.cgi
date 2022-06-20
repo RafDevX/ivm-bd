@@ -100,4 +100,38 @@ def add_category_post():
         cursor.close()
         dbConn.close()
 
+@app.route('/ivms')
+def list_ivms():
+    dbConn=None
+    cursor=None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        query = "SELECT * FROM ivm;"
+        cursor.execute(query)
+        return render_template("ivms.html", cursor=cursor)
+    except Exception as e:
+        return str(e) #Renders a page with the error.
+    finally:
+        cursor.close()
+        dbConn.close()
+
+@app.route('/replenishmentevents')
+def list_replenshimentevents():
+    dbConn=None
+    cursor=None
+    serial = request.args.get("serial")
+    manuf = request.args.get("manuf")
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        query = "SELECT * FROM evento_reposicao NATURAL JOIN produto NATURAL JOIN retalhista WHERE num_serie=%s AND fabricante=%s"
+        cursor.execute(query, (serial, manuf))
+        return render_template("replenishmentevents.html", cursor=cursor, params=request.args)
+    except Exception as e:
+        return str(e) #Renders a page with the error.
+    finally:
+        cursor.close()
+        dbConn.close()
+
 CGIHandler().run(app)
