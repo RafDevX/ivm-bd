@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS tem_outra (
 	categoria VARCHAR(50) NOT NULL,
 	PRIMARY KEY(super_categoria, categoria),
 	FOREIGN KEY(super_categoria) REFERENCES super_categoria(nome),
-	FOREIGN KEY(categoria) REFERENCES categoria(nome)
+	FOREIGN KEY(categoria) REFERENCES categoria(nome),
+	CHECK (super_categoria <> categoria)
 );
 
 CREATE TABLE IF NOT EXISTS produto (
