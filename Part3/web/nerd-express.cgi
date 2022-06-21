@@ -194,7 +194,7 @@ def delete_retailer():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "DELETE FROM retalhista WHERE name = %s;"
         cursor.execute(query, (name, ))
-        return render_template("success.html", cursor=cursor, params=request.args)
+        return render_template("success.html")
     except Exception as e:
         return str(e) #Renders a page with the error.
     finally:
