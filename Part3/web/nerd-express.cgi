@@ -55,7 +55,11 @@ def list_subcategories():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        query = "SELECT categoria FROM tem_outra WHERE super_categoria = %s;"
+        query = "WITH RECURSIVE subcategories AS ( \
+        SELECT categoria FROM tem_outra WHERE super_categoria=%s \
+        UNION SELECT t.categoria FROM tem_outra t \
+        INNER JOIN subcategories s ON s.categoria=t.super_categoria) \
+        SELECT * FROM subcategories;"
         cursor.execute(query, (category, ))
         return render_template("listsubcategories.html", cursor=cursor, params=request.args)
     except Exception as e:
