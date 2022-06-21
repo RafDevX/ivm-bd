@@ -30,10 +30,11 @@ CREATE TABLE IF NOT EXISTS super_categoria (
 CREATE TABLE IF NOT EXISTS tem_outra (
 	super_categoria VARCHAR(50) NOT NULL,
 	categoria VARCHAR(50) NOT NULL,
-	PRIMARY KEY(super_categoria, categoria),
+	PRIMARY KEY(categoria),
 	FOREIGN KEY(super_categoria) REFERENCES super_categoria(nome),
 	FOREIGN KEY(categoria) REFERENCES categoria(nome),
-	CHECK (super_categoria <> categoria)
+	CHECK (super_categoria <> categoria),
+	UNIQUE (super_categoria, categoria)
 );
 
 CREATE TABLE IF NOT EXISTS produto (
