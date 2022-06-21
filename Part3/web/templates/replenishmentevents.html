@@ -5,30 +5,51 @@
     <title>Nerd Express | Eventos de Reposição</title>
   </head>
   <body style="padding: 20px">
-    {% if cursor %}
+    {% if cursor1 %}
+    {% if cursor2 %}
     <a href="ivms">Voltar </a>
-    <h3>
+    <h2>
       Eventos de Reposição da IVM {{ params.get("serial") }} - {{
       params.get("manuf") }}
-    </h3>
+    </h2>
     <table border="2px">
       <thead>
         <tr>
           <th>Produto</th>
           <th>Núm. da prateleira</th>
-          <th>Instante</th>
+          <th>Data / Hora</th>
           <th>Unidades</th>
           <th>Retalhista</th>
         </tr>
       </thead>
       <tbody>
-        {% for record in cursor %}
+        {% for record in cursor1 %}
         <tr>
           <td>{{ record[1] }} ({{ record[7] }})</td>
           <td>{{ record[2] }}</td>
           <td>{{ record[5] }}</td>
           <td>{{ record[6] }}</td>
           <td>{{ record[1] }} ({{ record[8] }})</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <h3>Breakdown por categoria</h3>
+    <table border="2px">
+      <thead>
+        <tr>
+          <th>Núm. de Produtos</th>
+          <th>Categoria</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in cursor2 %}
+        <tr>
+          <td>{{ record[0] }}</td>
+          <td>{{ record[1] }}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -41,6 +62,7 @@
     </ul>
     {% else %}
     <p>Erro: não foi possível obter dados da base de dados!</p>
+    {% endif %}
     {% endif %}
   </body>
 </html>
