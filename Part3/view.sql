@@ -17,4 +17,4 @@ CREATE VIEW Vendas(ean, cat, ano, trimestre, mes, dia_mes, dia_semana, distrito,
 		NATURAL JOIN instalada_em
 		NATURAL JOIN tem_categoria
 	) AS er
-	INNER JOIN ponto_de_retalho AS pr ON (er.local = pr.nome);
+	INNER JOIN ponto_de_retalho AS pr ON er.local = pr.nome;
