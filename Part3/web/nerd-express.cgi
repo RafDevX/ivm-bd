@@ -184,4 +184,22 @@ def add_retailer_post():
         cursor.close()
         dbConn.close()
 
+@app.route('/deleteretailer')
+def delete_retailer():
+    dbConn=None
+    cursor=None
+    name = request.args.get("name")
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        query = "DELETE FROM retalhista WHERE name = %s;"
+        cursor.execute(query, (name, ))
+        return render_template("success.html", cursor=cursor, params=request.args)
+    except Exception as e:
+        return str(e) #Renders a page with the error.
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
 CGIHandler().run(app)
