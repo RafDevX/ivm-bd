@@ -218,9 +218,9 @@ INSERT INTO tem_outra(super_categoria, categoria) VALUES
 	('Compotas, Cremes e Mel', 'Nutella e Cremes de Barrar'),
 	('Compotas, Cremes e Mel', 'Mel'),
 	('Mercearia', 'Conservas'),
-	('Conservas', 'Atum')
-	('Conservas', 'Salsichas')
-	('Conservas', 'Patês')
+	('Conservas', 'Atum'),
+	('Conservas', 'Salsichas'),
+	('Conservas', 'Patês'),
 	('Peixaria e Talho', 'Peixaria'),
 	('Peixaria', 'Peixe Fresco'),
 	('Peixaria', 'Peixe Congelado'),
