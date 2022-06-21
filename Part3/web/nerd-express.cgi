@@ -93,7 +93,9 @@ def add_category_post():
             data += (super_category, category)
         if supercategory_dropdown == "yes":
             query += "INSERT INTO super_categoria(nome) VALUES (%s);"
-            data += (category, )
+        else:
+            query += "INSERT INTO categoria_simples(nome) VALUES (%s);"
+        data += (category, )
         cursor.execute(query, data)
         dbConn.commit()
         return render_template("success.html")
@@ -192,8 +194,9 @@ def delete_retailer():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        query = "DELETE FROM retalhista WHERE name = %s;"
-        cursor.execute(query, (name, ))
+        query = "DELETE FROM responsavel_por WHERE tin=(SELECT tin FROM retalhista WHERE name=%s);\
+        DELETE FROM retalhista WHERE name=%s;"
+        cursor.execute(query, (name, name))
         return render_template("success.html")
     except Exception as e:
         return str(e) #Renders a page with the error.
@@ -210,8 +213,12 @@ def delete_category():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        query = "DELETE FROM categoria WHERE nome = %s;"
-        cursor.execute(query, (name, ))
+        query = "DELETE FROM tem_outra WHERE super_categoria=%s;\
+        DELETE FROM tem_outra WHERE categoria=%s;\
+        DELETE FROM categoria_simples WHERE nome=%s;\
+        DELETE FROM super_categoria WHERE nome=%s;\
+        DELETE FROM categoria WHERE nome=%s;"
+        cursor.execute(query, (name, name, name, name, name))
         return render_template("success.html")
     except Exception as e:
         return str(e) #Renders a page with the error.
