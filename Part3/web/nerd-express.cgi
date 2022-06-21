@@ -141,4 +141,20 @@ def list_replenshimentevents():
         cursor2.close()
         dbConn.close()
 
+@app.route('/retailers')
+def list_retailers():
+    dbConn=None
+    cursor=None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        query = "SELECT * FROM retalhista;"
+        cursor.execute(query)
+        return render_template("retailers.html", cursor=cursor)
+    except Exception as e:
+        return str(e) #Renders a page with the error.
+    finally:
+        cursor.close()
+        dbConn.close()
+
 CGIHandler().run(app)
