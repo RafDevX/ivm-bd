@@ -249,13 +249,13 @@ INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (3, '123
 
 INSERT INTO produto(ean, descr) VALUES ('9002490100070', 'Ice Tea');
 INSERT INTO produto(ean, descr) VALUES ('9002490100123', 'Água');
-INSERT INTO produto(ean, descr) VALUES ('9002490100456', 'Oreos');
+INSERT INTO produto(ean, descr) VALUES ('9002490100456', 'Marmelada');
 INSERT INTO produto(ean, descr) VALUES ('9002490100789', 'Barritas');
 
 INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100070', 'Bebidas');
 INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100123', 'Bebidas');
 INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100123', 'Saudável');
-INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100456', 'Doces');
+INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100456', 'Doces e Compotas');
 INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100789', 'Barras de Cereais');
 INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100789', 'Saudável');
 
