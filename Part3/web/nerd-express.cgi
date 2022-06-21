@@ -127,14 +127,18 @@ def list_replenshimentevents():
     manuf = request.args.get("manuf")
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
-        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        query = "SELECT * FROM evento_reposicao NATURAL JOIN produto NATURAL JOIN retalhista WHERE num_serie=%s AND fabricante=%s"
-        cursor.execute(query, (serial, manuf))
-        return render_template("replenishmentevents.html", cursor=cursor, params=request.args)
+        cursor1 = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        cursor2 = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        query1 = "SELECT * FROM evento_reposicao NATURAL JOIN produto NATURAL JOIN retalhista WHERE num_serie=%s AND fabricante=%s"
+        query2 = "SELECT sum(unidades), nome FROM evento_reposicao NATURAL JOIN tem_categoria WHERE num_serie=%s AND fabricante=%s GROUP BY nome ;"
+        cursor1.execute(query1, (serial, manuf))
+        cursor2.execute(query2, (serial, manuf))
+        return render_template("replenishmentevents.html", cursor1=cursor1, cursor2=cursor2, params=request.args)
     except Exception as e:
         return str(e) #Renders a page with the error.
     finally:
-        cursor.close()
+        cursor1.close()
+        cursor2.close()
         dbConn.close()
 
 CGIHandler().run(app)
