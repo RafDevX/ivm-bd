@@ -202,4 +202,22 @@ def delete_retailer():
         cursor.close()
         dbConn.close()
 
+@app.route('/deletecategory')
+def delete_category():
+    dbConn=None
+    cursor=None
+    name = request.args.get("category")
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        query = "DELETE FROM categoria WHERE nome = %s;"
+        cursor.execute(query, (name, ))
+        return render_template("success.html")
+    except Exception as e:
+        return str(e) #Renders a page with the error.
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
 CGIHandler().run(app)
