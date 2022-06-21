@@ -227,7 +227,7 @@ INSERT INTO tem_outra(super_categoria, categoria) VALUES
 	('Peixaria', 'Mariscos'),
 	('Peixaria e Talho', 'Talho'),
 	('Talho', 'Porco'),
-	('Talho', 'Novilho, Vitela e Vitelão'),,
+	('Talho', 'Novilho, Vitela e Vitelão'),
 	('Talho', 'Frango e Peru'),
 	('Peixaria e Talho', 'Alternativas Vegetarianas'),
 	('Lacticínios e Ovos', 'Ovos'),
