@@ -164,4 +164,24 @@ def add_retailer_get():
     except Exception as e:
         return str(e) #Renders a page with the error.
 
+@app.route('/addretailer', methods=["POST"])
+def add_retailer_post():
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        tin = request.form["tin"]
+        name = request.form["name"]
+        data = (tin, name)
+        if name == "" or tin == "" :
+            return redirect("/nerd-express.cgi/addretailer")
+        query = "INSERT INTO retalhista(tin, name) VALUES (%s, %s)"
+        cursor.execute(query, data)
+        return render_template("success.html")
+    except Exception as e:
+        return str(e) #Renders a page with the error.
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
 CGIHandler().run(app)
