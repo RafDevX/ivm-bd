@@ -157,4 +157,11 @@ def list_retailers():
         cursor.close()
         dbConn.close()
 
+@app.route('/addretailer', methods=["GET"])
+def add_retailer_get():
+    try:
+        return render_template("addretailer.html")
+    except Exception as e:
+        return str(e) #Renders a page with the error.
+
 CGIHandler().run(app)
