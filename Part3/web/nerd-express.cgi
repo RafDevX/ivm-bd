@@ -87,20 +87,19 @@ def add_category_post():
         data = (category, )
         if category == "" or (super_category == "" and subcategory_dropdown == "yes"):
             return redirect("/nerd-express.cgi/addcategory")
-        query = "START TRANSACTION; INSERT INTO categoria(nome) VALUES (%s);"
+        query = "INSERT INTO categoria(nome) VALUES (%s);"
         if subcategory_dropdown == "yes":
             query += "INSERT INTO tem_outra(super_categoria, categoria) VALUES (%s, %s);"  
             data += (super_category, category)
         if supercategory_dropdown == "yes":
             query += "INSERT INTO super_categoria(nome) VALUES (%s);"
             data += (category, )
-        query += "COMMIT;"
         cursor.execute(query, data)
+        dbConn.commit()
         return render_template("success.html")
     except Exception as e:
         return str(e) #Renders a page with the error.
     finally:
-        dbConn.commit()
         cursor.close()
         dbConn.close()
 
