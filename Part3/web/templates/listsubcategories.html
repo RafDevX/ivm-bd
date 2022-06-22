@@ -10,7 +10,14 @@
   </head>
   <body style="padding: 20px">
     {% if cursor %}
-    <a href="categories">Voltar </a>
+    <nav>
+      <ul>
+        <li><a href="categories">Voltar </a></li>
+      </ul>
+      <ul>
+        <li><a href="/nerd-express.cgi/">Página Inicial </a></li>
+      </ul>
+    </nav>
     <h3>Sub-categorias de {{ params.get("category") }}</h3>
     <table border="2px">
       <thead>

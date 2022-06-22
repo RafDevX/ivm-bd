@@ -9,9 +9,15 @@
     <title>Nerd Express | Eventos de Reposição</title>
   </head>
   <body style="padding: 20px">
-    {% if cursor1 %}
-    {% if cursor2 %}
-    <a href="ivms">Voltar </a>
+    {% if cursor1 %} {% if cursor2 %}
+    <nav>
+      <ul>
+        <li><a href="ivms">Voltar </a></li>
+      </ul>
+      <ul>
+        <li><a href="/nerd-express.cgi/">Página Inicial </a></li>
+      </ul>
+    </nav>
     <h2>
       Eventos de Reposição da IVM {{ params.get("serial") }} - {{
       params.get("manuf") }}

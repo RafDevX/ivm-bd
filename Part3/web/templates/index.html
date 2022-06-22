@@ -10,34 +10,13 @@
   </head>
   <body style="padding: 20px">
     {% if cursor %}
-    <h3>Bem-vindo ao painel de Administração das máquinas Nerd-Express!</h3>
-    <h3>Este site está em desenvolvimento.</h3>
-    <p>versão 3.2.7</p>
-    <h2>Listagem de todos os produtos disponíveis nas nossas máquinas:</h2>
-    <table border="2px">
-      <thead>
-        <tr>
-          <th>EAN</th>
-          <th>Descrição</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for record in cursor %}
-        <tr>
-          <td>{{ record[0] }}</td>
-          <td>{{ record[1] }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <br />
-    <br />
-    <h3>Links Rápidos</h3>
-    <ul>
-      <li><a href="categories">Listar Categorias </a></li>
-      <li><a href="retailers">Listar Retalhistas </a></li>
-      <li><a href="ivms">Listar IVMs </a></li>
-    </ul>
+    <nav>
+      <li><strong>Nerd-Express</strong></li>
+      <ul>
+        <li><a href="categories">Listar Categorias </a></li>
+        <li><a href="retailers">Listar Retalhistas </a></li>
+        <li><a href="ivms">Listar IVMs </a></li>
+      </ul>
 
     {% else %}
     <p>Erro: ao obter dados da base de dados!</p>

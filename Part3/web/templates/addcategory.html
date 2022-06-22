@@ -9,7 +9,15 @@
     <title>Nerd Express | Adicionar Categoria</title>
   </head>
   <body style="padding: 20px">
-    <a href="categories">Voltar </a>
+    {% if cursor %}
+    <nav>
+      <ul>
+        <li><a href="categories">Voltar </a></li>
+      </ul>
+      <ul>
+        <li><a href="/nerd-express.cgi/">Página Inicial </a></li>
+      </ul>
+    </nav>
     <h2>Adicionar nova categoria</h2>
     <form action="" method="post">
       <p>Nome * <input type="text" name="category" /></p>
