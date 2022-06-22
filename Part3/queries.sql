@@ -1,4 +1,4 @@
-/* Qual o nome do retalhista (ou retalhistas) responsáveis pela reposição do maior número de categorias? */
+/* 1. Qual o nome do retalhista (ou retalhistas) responsáveis pela reposição do maior número de categorias? */
 SELECT name 
   FROM retalhista 
   NATURAL JOIN responsavel_por 
@@ -9,7 +9,7 @@ SELECT name
     GROUP BY tin
 );
 
-/* Qual o nome do ou dos retalhistas que são responsáveis por todas as categorias simples? */
+/* 2. Qual o nome do ou dos retalhistas que são responsáveis por todas as categorias simples? */
 SELECT DISTINCT name FROM responsavel_por rp NATURAL JOIN retalhista
 WHERE NOT EXISTS (
   SELECT nome
@@ -22,7 +22,7 @@ WHERE NOT EXISTS (
   WHERE responsavel_por.tin = rp.tin
 );
 
-/* Quais os produtos (ean) que nunca foram repostos? */
+/* 3. Quais os produtos (ean) que nunca foram repostos? */
 SELECT p.ean
 FROM produto AS p LEFT OUTER JOIN evento_reposicao er ON (p.ean = er.ean)
 WHERE er.ean IS NULL;
