@@ -32,8 +32,6 @@ FROM produto AS p LEFT OUTER JOIN evento_reposicao er ON (p.ean = er.ean)
 WHERE er.ean IS NULL;
 
 /* Quais os produtos (ean) que foram repostos sempre pelo mesmo retalhista? */
-SELECT ean FROM (
-  SELECT ean, COUNT(DISTINCT tin) AS count
-  FROM evento_reposicao
-  GROUP BY ean
-) AS t WHERE count = 1;
+SELECT ean FROM evento_reposicao
+  GROUP BY ean 
+  HAVING COUNT(DISTINCT tin) = 1;
