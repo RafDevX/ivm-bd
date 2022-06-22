@@ -1,4 +1,4 @@
-/* O número de unidades repostas  num evento de reposição não pode exceder o número de unidades especificado no planograma */
+/* RI-4: O número de unidades repostas num evento de reposição não pode exceder o número de unidades especificado no planograma */
 CREATE OR REPLACE FUNCTION chk_oversupply() RETURNS TRIGGER AS
 $$
 DECLARE max_units INTEGER;
