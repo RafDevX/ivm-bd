@@ -46,3 +46,19 @@ DROP TRIGGER IF EXISTS trigger_presentable ON evento_reposicao;
 CREATE TRIGGER trigger_presentable
 	BEFORE UPDATE OR INSERT ON evento_reposicao
 	FOR EACH ROW EXECUTE PROCEDURE chk_presentable();
+
+/* ISTO DESFAZ SUPER CATEGORIAS MAS NÃO SEI COMO USAR:
+
+WITH RECURSIVE cats(categoria, super_categoria) AS (
+  SELECT categoria, super_categoria FROM (
+    SELECT categoria, super_categoria, nro, num_serie, fabricante
+    FROM tem_outra INNER JOIN prateleira ON (prateleira.nome = tem_outra.super_categoria)
+    WHERE nro = 1 AND num_serie = 'ABCD' AND fabricante = 'Aldi'
+  ) AS base
+  UNION
+  SELECT c.categoria, c.super_categoria
+  FROM tem_outra c
+  INNER JOIN cats s ON s.categoria = c.super_categoria
+)
+SELECT categoria FROM cats;
+*/

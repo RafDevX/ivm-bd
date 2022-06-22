@@ -122,6 +122,7 @@ INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (2, 'ABC
 INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (1, 'ABCD', 'Lidl', 100, 'Barras de Cereais');
 INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (1, '1234', 'Aldi', 300, 'Barras de Cereais');
 INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (3, '1234', 'Aldi', 120, 'Bebidas');
+INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (4, 'ABCD', 'Lidl', 120, 'Mercearia');
 
 INSERT INTO produto(ean, descr) VALUES ('9002490100070', 'Ice Tea');
 INSERT INTO produto(ean, descr) VALUES ('9002490100123', 'Água');
