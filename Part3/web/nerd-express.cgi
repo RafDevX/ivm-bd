@@ -86,26 +86,27 @@ def add_category_post():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         category = request.form["category"]
         super_category = request.form["supercategory"]
-        supercategory_dropdown = request.form["supercategorydropdown"]
-        subcategory_dropdown = request.form["subcategorydropdown"]
+        subswitch = "off"
+        if "subswitch" in request.form.keys():
+            subswitch = request.form["subswitch"]
         data = (category, )
-        if category == "" or (super_category == "" and subcategory_dropdown == "yes"):
+        if category == "":
             return redirect("/nerd-express.cgi/addcategory")
         query = "INSERT INTO categoria(nome) VALUES (%s);"
-        if subcategory_dropdown == "yes":
-            query += "INSERT INTO tem_outra(super_categoria, categoria) VALUES (%s, %s);"  
-            data += (super_category, category)
-        if supercategory_dropdown == "yes":
-            query += "INSERT INTO super_categoria(nome) VALUES (%s);"
-        else:
-            query += "INSERT INTO categoria_simples(nome) VALUES (%s);"
+        if subswitch == "on":
+            query += "DELETE FROM categoria_simples WHERE nome=%s;\
+            DELETE FROM super_categoria WHERE nome=%s;\
+            INSERT INTO super_categoria(nome) VALUES (%s);\
+            INSERT INTO tem_outra(super_categoria, categoria) VALUES (%s, %s);"  
+            data += (super_category, super_category, super_category, super_category, category)
+        query += "INSERT INTO categoria_simples(nome) VALUES (%s);"
         data += (category, )
         cursor.execute(query, data)
-        dbConn.commit()
         return render_template("success.html")
     except Exception as e:
         return str(e) #Renders a page with the error.
     finally:
+        dbConn.commit()
         cursor.close()
         dbConn.close()
 
