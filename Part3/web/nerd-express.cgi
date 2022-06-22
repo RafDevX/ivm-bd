@@ -71,7 +71,11 @@ def list_subcategories():
 @app.route('/addcategory', methods=["GET"])
 def add_category_get():
     try:
-        return render_template("addcategory.html")
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        query = "SELECT nome FROM categoria"
+        cursor.execute(query)
+        return render_template("addcategory.html", cursor=cursor)
     except Exception as e:
         return str(e) #Renders a page with the error.
 
