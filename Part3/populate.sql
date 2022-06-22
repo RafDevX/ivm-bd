@@ -1,6 +1,32 @@
 INSERT INTO IVM(num_serie, fabricante) VALUES ('ABCD', 'Aldi');
 INSERT INTO IVM(num_serie, fabricante) VALUES ('1234', 'Aldi');
 INSERT INTO IVM(num_serie, fabricante) VALUES ('ABCD', 'Lidl');
+INSERT INTO IVM(num_serie, fabricante) VALUES
+  ('001', 'Aldi'),
+  ('002', 'Aldi'),
+  ('003', 'Aldi'),
+  ('004', 'Aldi'),
+  ('005', 'Aldi'),
+  ('006', 'Aldi'),
+  ('007', 'Aldi'),
+  ('008', 'Aldi'),
+  ('009', 'Aldi'),
+  ('010', 'Aldi'),
+  ('011', 'Aldi'),
+  ('012', 'Aldi'),
+  ('013', 'Aldi'),
+  ('014', 'Aldi'),
+  ('015', 'Aldi'),
+  ('016', 'Aldi'),
+  ('017', 'Aldi'),
+  ('018', 'Aldi'),
+  ('019', 'Aldi'),
+  ('020', 'Aldi'),
+  ('021', 'Aldi'),
+  ('022', 'Aldi'),
+  ('023', 'Aldi'),
+  ('024', 'Aldi'),
+  ('025', 'Aldi');
 
 INSERT INTO ponto_de_retalho(nome, distrito, concelho) VALUES ('Galp Oeiras', 'Lisboa', 'Oeiras');
 
@@ -147,10 +173,36 @@ INSERT INTO retalhista(tin, name) VALUES ('500345678', 'Shell');
 
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2020-06-14T15:24:21Z', 10, '500123456');
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2020-07-13T12:04:41Z', 01, '500123456');
-INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2021-02-11T19:04:21Z', 04, '500123456');
+INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2021-02-11T19:04:21Z', 04, '500789012');
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, 'ABCD', 'Lidl', '2022-03-13T08:09:12Z', 02, '500345678');
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, '1234', 'Aldi', '2022-03-13T08:09:13Z', 12, '500345678');
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, '1234', 'Aldi', '2022-03-13T08:09:24Z', 13, '500345678');
 
-INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Bebidas',  '500123456', 'ABCD', 'Aldi');
-INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Saudável', '500345678', 'ABCD', 'Lidl');
+INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Bebidas',  '500123456', 'ABCD', 'Lidl');
+INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Saudável', '500345678', 'ABCD', 'Aldi');
+INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES
+	('Ovos', '500789012', '001', 'Aldi'),
+	('Leite Magro', '500789012', '002', 'Aldi'),
+	('Leite Meio Gordo', '500789012', '003', 'Aldi'),
+	('Leite Gordo', '500789012', '004', 'Aldi'),
+	('Iogurtes Líquidos', '500789012', '005', 'Aldi'),
+	('Iogurtes Proteína', '500789012', '006', 'Aldi'),
+	('Iogurtes Gregos', '500789012', '007', 'Aldi'),
+	('Cereais Linha e Fibra', '500789012', '008', 'Aldi'),
+	('Muesli e Granola', '500789012', '009', 'Aldi'),
+	('Barras de Cereais', '500789012', '010', 'Aldi'),
+	('Doces e Compotas', '500789012', '011', 'Aldi'),
+	('Mel', '500789012', '012', 'Aldi'),
+	('Nutella e Cremes de Barrar', '500789012', '013', 'Aldi'),
+	('Atum', '500789012', '014', 'Aldi'),
+	('Salsichas', '500789012', '015', 'Aldi'),
+	('Patês', '500789012', '016', 'Aldi'),
+	('Alternativas Vegetarianas', '500789012', '017', 'Aldi'),
+	('Peixe Fresco', '500789012', '018', 'Aldi'),
+	('Peixe Congelado', '500789012', '019', 'Aldi'),
+	('Mariscos', '500789012', '020', 'Aldi'),
+	('Porco', '500789012', '021', 'Aldi'),
+	('Novilho, Vitela e Vitelão', '500789012', '022', 'Aldi'),
+	('Frango e Peru', '500789012', '023', 'Aldi'),
+	('Bebidas', '500789012', '024', 'Aldi'),
+	('Saudável', '500789012', '025', 'Aldi');
