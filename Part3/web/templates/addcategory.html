@@ -22,42 +22,34 @@
     <form action="" method="post">
       <p>Nome * <input type="text" name="category" /></p>
       <p>
-        <label>É super-categoria?</label>
-        <select name="supercategorydropdown">
-          <option value="yes">Sim</option>
-          <option selected value="no">Não</option>
-        </select>
-      </p>
-      <p>
-        <label>É sub-categoria?</label>
-        <select
-          name="subcategorydropdown"
-          id="subdropdown"
-          onchange="checkOption()"
-        >
-          <option value="yes">Sim</option>
-          <option selected value="no">Não</option>
-        </select>
+        <label>
+          <input
+            type="checkbox"
+            id="subswitch"
+            name="subswitch"
+            role="switch"
+            onchange="checkOption()"
+          />
+          Sub-categoria
+        </label>
       </p>
       <p id="supercategoryName" style="display: none">
-        <label for="supercategory">Nome da super-categoria *</label>
-        <input type="text" name="supercategory" />
+        <label>Nome da super-categoria *</label>
+        <select name="supercategory">
+          {% for record in cursor %}
+          <option value="{{ record[0] }}">{{ record[0] }}</option>
+          {% endfor %}
+        </select>
       </p>
       <p><input type="submit" value="Submeter" /></p>
     </form>
-    <br />
-    <br />
-    <h3>Links Rápidos</h3>
-    <ul>
-      <li><a href="/nerd-express.cgi/">Página Principal </a></li>
-    </ul>
+    {% endif %}
   </body>
   <script>
     function checkOption() {
-      const dropDown = document.getElementById("subdropdown");
       const textBox = document.getElementById("supercategoryName");
 
-      if (dropDown.value == "yes") {
+      if (textBox.style.display == "none") {
         textBox.style.display = "initial";
       } else {
         textBox.style.display = "none";
