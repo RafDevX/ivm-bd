@@ -19,7 +19,11 @@
       </ul>
     </nav>
     <h2>Lista de Categorias</h2>
-    <table border="2px">
+    <br />
+    <a href="addcategory" role="button">Adicionar Categoria</a>
+    <br />
+    <br />
+    <table>
       <thead>
         <tr>
           <th>Categoria</th>
@@ -32,12 +36,15 @@
         <tr>
           <td>{{ record[0] }}</td>
           <td>
-            <a href="listsubcategories?category={{ record[0] }}"
+            <a href="listsubcategories?category={{ record[0] }}" role="button"
               >Listar Sub-Categorias
             </a>
           </td>
           <td>
-            <a href="deletecategory?category={{ record[0] }}"
+            <a
+              href="deletecategory?category={{ record[0] }}"
+              role="button"
+              class="contrast"
               >Apagar Categoria
             </a>
           </td>

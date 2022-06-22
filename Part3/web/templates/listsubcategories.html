@@ -29,6 +29,19 @@
         {% for record in cursor %}
         <tr>
           <td>{{ record[0] }}</td>
+          <td>
+            <a href="listsubcategories?category={{ record[0] }}" role="button"
+              >Listar Sub-Categorias
+            </a>
+          </td>
+          <td>
+            <a
+              href="deletecategory?category={{ record[0] }}"
+              role="button"
+              class="contrast"
+              >Apagar Categoria
+            </a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
