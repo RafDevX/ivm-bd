@@ -8,7 +8,7 @@ CREATE VIEW Vendas(ean, cat, ano, trimestre, mes, dia_mes, dia_semana, distrito,
 		EXTRACT(QUARTER FROM er.instante),
 		EXTRACT(MONTH FROM er.instante),
 		EXTRACT(DAY FROM er.instante),
-		EXTRACT(DOW FROM er.instante),
+		TO_CHAR(er.instante, 'Day'),
 		pr.distrito,
 		pr.concelho,
 		er.unidades
