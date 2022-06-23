@@ -28,7 +28,10 @@
       />
     </div>
     <article align="center">
-      {% if "23503" in error.pgcode %}ERROR: foreign_key_violation{% endif %}
+      {% if "23505" in error.pgcode and context == "category" %}ERRO: O nome da
+      categoria deve ser único {% endif %} {% if "23505" in error.pgcode and
+      context == "retailer" %}ERRO: O nome e TIN do retalhista devem ser únicos
+      {% endif %}
     </article>
     <br />
     <br />
