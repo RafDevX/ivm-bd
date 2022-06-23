@@ -19,9 +19,58 @@
     </nav>
     <h2>Adicionar novo retalhista</h2>
     <form action="" method="post">
-      <p>Nome * <input type="text" name="name" /></p>
-      <p>TIN * <input type="text" name="tin" /></p>
-      <p><input type="submit" value="Submeter" /></p>
+      <div>
+        Nome *
+        <input type="text" id="name" name="name" oninput="checkOption()" />
+        <p style="color: red; display: none" id="warning_name">
+          O nome tem no máximo 50 caracteres!
+        </p>
+      </div>
+      <div>
+        TIN *
+        <input type="text" id="tin" name="tin" oninput="checkOption()" />
+        <p style="color: red; display: none" id="warning_tin">
+          O TIN tem no máximo 9 dígitos!
+        </p>
+        <br />
+        <p style="color: red; display: none" id="warning_digits">
+          O TIN só pode ser composto por números!
+        </p>
+      </div>
+      <br />
+      <p><input type="submit" id="submit" value="Submeter" /></p>
     </form>
   </body>
+  <script>
+    function checkOption() {
+      const warning_name = document.getElementById("warning_name");
+      const warning_tin = document.getElementById("warning_tin");
+      const warning_digits = document.getElementById("warning_digits");
+      const name = document.getElementById("name");
+      const tin = document.getElementById("tin");
+      const submit = document.getElementById("submit");
+      const numbers = /^[0-9]+$/;
+      if (name.value.length > 50) {
+        warning_name.style.display = "initial";
+        submit.disabled = true;
+      } else {
+        warning_name.style.display = "none";
+        submit.disabled = false;
+      }
+      if (tin.value.length > 9) {
+        warning_tin.style.display = "initial";
+        submit.disabled = true;
+      } else {
+        warning_tin.style.display = "none";
+        submit.disabled = false;
+      }
+      if (!tin.value.match(numbers)) {
+        warning_digits.style.display = "initial";
+        submit.disabled = true;
+      } else {
+        warning_digits.style.display = "none";
+        submit.disabled = false;
+      }
+    }
+  </script>
 </html>
