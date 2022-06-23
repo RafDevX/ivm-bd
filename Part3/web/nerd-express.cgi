@@ -26,7 +26,7 @@ def list_products():
         cursor.execute(query)
         return render_template("index.html", cursor=cursor)
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         cursor.close()
         dbConn.close()
@@ -42,7 +42,7 @@ def list_categories():
         cursor.execute(query)
         return render_template("categories.html", cursor=cursor)
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         cursor.close()
         dbConn.close()
@@ -63,7 +63,7 @@ def list_subcategories():
         cursor.execute(query, (category, ))
         return render_template("listsubcategories.html", cursor=cursor, params=request.args)
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         cursor.close()
         dbConn.close()
@@ -77,7 +77,7 @@ def add_category_get():
         cursor.execute(query)
         return render_template("addcategory.html", cursor=cursor)
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
 
 @app.route('/addcategory', methods=["POST"])
 def add_category_post():
@@ -104,7 +104,7 @@ def add_category_post():
         cursor.execute(query, data)
         return render_template("success.html")
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         dbConn.commit()
         cursor.close()
@@ -121,7 +121,7 @@ def list_ivms():
         cursor.execute(query)
         return render_template("ivms.html", cursor=cursor)
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         cursor.close()
         dbConn.close()
@@ -142,7 +142,7 @@ def list_replenshimentevents():
         cursor2.execute(query2, (serial, manuf))
         return render_template("replenishmentevents.html", cursor1=cursor1, cursor2=cursor2, params=request.args)
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         cursor1.close()
         cursor2.close()
@@ -159,7 +159,7 @@ def list_retailers():
         cursor.execute(query)
         return render_template("retailers.html", cursor=cursor)
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         cursor.close()
         dbConn.close()
@@ -169,7 +169,7 @@ def add_retailer_get():
     try:
         return render_template("addretailer.html")
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
 
 @app.route('/addretailer', methods=["POST"])
 def add_retailer_post():
@@ -185,7 +185,7 @@ def add_retailer_post():
         cursor.execute(query, data)
         return render_template("success.html")
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         dbConn.commit()
         cursor.close()
@@ -204,7 +204,7 @@ def delete_retailer():
         cursor.execute(query, (name, name))
         return render_template("success.html")
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         dbConn.commit()
         cursor.close()
@@ -226,7 +226,7 @@ def delete_category():
         cursor.execute(query, (name, name, name, name, name))
         return render_template("success.html")
     except Exception as e:
-        return str(e) #Renders a page with the error.
+        return render_template("error.html", error=e) #Renders a page with the error.
     finally:
         dbConn.commit()
         cursor.close()
