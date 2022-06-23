@@ -48,7 +48,7 @@
         </p>
       </div>
       <br />
-      <p><input type="submit" id="submit" value="Submeter" /></p>
+      <p><input type="submit" id="submit" value="Submeter" disabled /></p>
     </form>
   </body>
   <script>
@@ -60,26 +60,36 @@
       const tin = document.getElementById("tin");
       const submit = document.getElementById("submit");
       const numbers = /^[0-9]+$/;
+      let check1,
+        check2,
+        check3 = false;
       if (name.value.length > 50) {
         warning_name.style.display = "initial";
-        submit.disabled = true;
+        check1 = false;
+      } else if (name.value.length == 0) {
+        check1 = false;
       } else {
         warning_name.style.display = "none";
-        submit.disabled = false;
+        check1 = true;
       }
-      if (tin.value.length > 9) {
+      if (tin.value.length != 9) {
         warning_tin.style.display = "initial";
-        submit.disabled = true;
+        check2 = false;
       } else {
         warning_tin.style.display = "none";
-        submit.disabled = false;
+        check2 = true;
       }
-      if (!tin.value.match(numbers)) {
+      if (!tin.value.match(numbers) && tin.value.length > 0) {
         warning_digits.style.display = "initial";
-        submit.disabled = true;
+        check3 = false;
       } else {
         warning_digits.style.display = "none";
+        check3 = true;
+      }
+      if (check1 && check2 && check3) {
         submit.disabled = false;
+      } else {
+        submit.disabled = true;
       }
     }
   </script>

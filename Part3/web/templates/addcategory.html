@@ -53,7 +53,7 @@
           {% endfor %}
         </select>
       </p>
-      <p><input type="submit" value="Submeter" /></p>
+      <p><input type="submit" id="submit" value="Submeter" disabled /></p>
     </form>
     {% endif %}
   </body>
@@ -69,11 +69,14 @@
     }
     function checkName() {
       const category = document.getElementById("category");
+      const submit = document.getElementById("submit");
       const warning_name = document.getElementById("warning_name");
-      if (category.value.length > 50) {
+      if (category.value.length > 50 || category.value.length == 0) {
         warning_name.style.display = "initial";
+        submit.disabled = true;
       } else {
         warning_name.style.display = "none";
+        submit.disabled = false;
       }
     }
   </script>
