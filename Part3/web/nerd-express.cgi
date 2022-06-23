@@ -104,7 +104,7 @@ def add_category_post():
         cursor.execute(query, data)
         return render_template("success.html")
     except Exception as e:
-        return render_template("error.html", error=e) #Renders a page with the error.
+        return render_template("error.html", error=e, context="category") #Renders a page with the error.
     finally:
         dbConn.commit()
         cursor.close()
@@ -185,7 +185,7 @@ def add_retailer_post():
         cursor.execute(query, data)
         return render_template("success.html")
     except Exception as e:
-        return render_template("error.html", error=e) #Renders a page with the error.
+        return render_template("error.html", error=e, context="retailer") #Renders a page with the error.
     finally:
         dbConn.commit()
         cursor.close()
