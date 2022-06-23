@@ -20,17 +20,27 @@
     <h2>Adicionar novo retalhista</h2>
     <form action="" method="post">
       <div>
-        Nome *
-        <input type="text" id="name" name="name" oninput="checkOption()" />
+        <input
+          type="text"
+          placeholder="Nome"
+          id="name"
+          name="name"
+          oninput="checkOption()"
+        />
         <p style="color: red; display: none" id="warning_name">
           O nome tem no máximo 50 caracteres!
         </p>
       </div>
       <div>
-        TIN *
-        <input type="text" id="tin" name="tin" oninput="checkOption()" />
-        <p style="color: red; display: none" id="warning_tin">
-          O TIN tem no máximo 9 dígitos!
+        <input
+          type="text"
+          placeholder="TIN"
+          id="tin"
+          name="tin"
+          oninput="checkOption()"
+        />
+        <p style="display: initial" id="warning_tin">
+          O TIN tem que ter 9 dígitos.
         </p>
         <br />
         <p style="color: red; display: none" id="warning_digits">
