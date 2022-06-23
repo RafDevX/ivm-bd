@@ -23,9 +23,12 @@ WHERE NOT EXISTS (
 );
 
 /* 3. Quais os produtos (ean) que nunca foram repostos? */
-SELECT p.ean
-FROM produto AS p LEFT OUTER JOIN evento_reposicao er ON (p.ean = er.ean)
-WHERE er.ean IS NULL;
+SELECT ean
+  FROM produto
+  WHERE ean NOT IN (
+    SELECT DISTINCT ean
+    FROM evento_reposicao
+);
 
 /* 4. Quais os produtos (ean) que foram repostos sempre pelo mesmo retalhista? */
 SELECT ean FROM evento_reposicao
