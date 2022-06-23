@@ -8,7 +8,7 @@ SELECT dia_semana, concelho, SUM(unidades)
 
 /* 2. num dado distrito (i.e. "Lisboa"), por concelho, categoria, dia da semana e no total */
 
-SELECT conselho, cat, dia_semana, SUM(unidades)
+SELECT concelho, cat, dia_semana, SUM(unidades)
 	FROM Vendas
 	WHERE distrito = 'Lisboa'
 	GROUP BY CUBE(concelho, cat, dia_semana);
