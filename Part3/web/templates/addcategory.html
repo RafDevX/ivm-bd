@@ -29,7 +29,7 @@
           oninput="checkName()"
         />
         <p style="color: red; display: none" id="warning_name">
-          O nome tem no máximo 50 caracteres!
+          O nome pode ter no máximo 50 caracteres!
         </p>
       </div>
       <br />
@@ -46,7 +46,7 @@
         </label>
       </p>
       <p id="supercategoryName" style="display: none">
-        <label>Nome da super-categoria *</label>
+        <label>Nome da super-categoria</label>
         <select name="supercategory">
           {% for record in cursor %}
           <option value="{{ record[0] }}">{{ record[0] }}</option>
