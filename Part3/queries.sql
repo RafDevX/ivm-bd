@@ -10,16 +10,18 @@ SELECT name
 );
 
 /* 2. Qual o nome do ou dos retalhistas que são responsáveis por todas as categorias simples? */
-SELECT DISTINCT name FROM responsavel_por rp NATURAL JOIN retalhista
-WHERE NOT EXISTS (
-  SELECT nome
-  FROM categoria_simples
-  EXCEPT
-  SELECT categoria_simples.nome
-  FROM categoria_simples
-  INNER JOIN responsavel_por
+SELECT DISTINCT name
+  FROM responsavel_por rp
+  NATURAL JOIN retalhista
+  WHERE NOT EXISTS (
+    SELECT nome
+    FROM categoria_simples
+    EXCEPT
+    SELECT categoria_simples.nome
+    FROM categoria_simples
+    INNER JOIN responsavel_por
     ON responsavel_por.nome_cat = categoria_simples.nome
-  WHERE responsavel_por.tin = rp.tin
+    WHERE responsavel_por.tin = rp.tin
 );
 
 /* 3. Quais os produtos (ean) que nunca foram repostos? */
