@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+    <title>Nerd Express | Erro</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      div {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body style="padding: 20px">
+    <h1>Infelizmente não foi possível efetuar a operação :(</h1>
+    <div>
+      <img
+        src="https://acegif.com/wp-content/gifs/sad-cat-60.gif"
+        width="20%"
+      />
+    </div>
+    <article align="center">
+      {% if "23503" in error.pgcode %}ERROR: foreign_key_violation{% endif %}
+    </article>
+    <br />
+    <br />
+    <p><a href="/nerd-express.cgi/" role="button">Página Inicial</a></p>
+  </body>
+</html>
