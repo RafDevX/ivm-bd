@@ -1,6 +1,32 @@
 INSERT INTO IVM(num_serie, fabricante) VALUES ('ABCD', 'Aldi');
 INSERT INTO IVM(num_serie, fabricante) VALUES ('1234', 'Aldi');
 INSERT INTO IVM(num_serie, fabricante) VALUES ('ABCD', 'Lidl');
+INSERT INTO IVM(num_serie, fabricante) VALUES
+  ('001', 'Spar'),
+  ('002', 'Spar'),
+  ('003', 'Spar'),
+  ('004', 'Spar'),
+  ('005', 'Spar'),
+  ('006', 'Spar'),
+  ('007', 'Spar'),
+  ('008', 'Spar'),
+  ('009', 'Spar'),
+  ('010', 'Spar'),
+  ('011', 'Spar'),
+  ('012', 'Spar'),
+  ('013', 'Spar'),
+  ('014', 'Spar'),
+  ('015', 'Spar'),
+  ('016', 'Spar'),
+  ('017', 'Spar'),
+  ('018', 'Spar'),
+  ('019', 'Spar'),
+  ('020', 'Spar'),
+  ('021', 'Spar'),
+  ('022', 'Spar'),
+  ('023', 'Spar'),
+  ('024', 'Spar'),
+  ('025', 'Spar');
 
 INSERT INTO ponto_de_retalho(nome, distrito, concelho) VALUES ('Galp Oeiras', 'Lisboa', 'Oeiras');
 
@@ -147,10 +173,36 @@ INSERT INTO retalhista(tin, name) VALUES ('500345678', 'Shell');
 
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2020-06-14T15:24:21Z', 10, '500123456');
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2020-07-13T12:04:41Z', 01, '500123456');
-INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2021-02-11T19:04:21Z', 04, '500123456');
+INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2021-02-11T19:04:21Z', 04, '500789012');
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, 'ABCD', 'Lidl', '2022-03-13T08:09:12Z', 02, '500345678');
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, '1234', 'Aldi', '2022-03-13T08:09:13Z', 12, '500345678');
 INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, '1234', 'Aldi', '2022-03-13T08:09:24Z', 13, '500345678');
 
-INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Bebidas',  '500123456', 'ABCD', 'Aldi');
-INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Saudável', '500345678', 'ABCD', 'Lidl');
+INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Bebidas',  '500123456', 'ABCD', 'Lidl');
+INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Saudável', '500345678', 'ABCD', 'Aldi');
+INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES
+	('Ovos', '500789012', '001', 'Spar'),
+	('Leite Magro', '500789012', '002', 'Spar'),
+	('Leite Meio Gordo', '500789012', '003', 'Spar'),
+	('Leite Gordo', '500789012', '004', 'Spar'),
+	('Iogurtes Líquidos', '500789012', '005', 'Spar'),
+	('Iogurtes Proteína', '500789012', '006', 'Spar'),
+	('Iogurtes Gregos', '500789012', '007', 'Spar'),
+	('Cereais Linha e Fibra', '500789012', '008', 'Spar'),
+	('Muesli e Granola', '500789012', '009', 'Spar'),
+	('Barras de Cereais', '500789012', '010', 'Spar'),
+	('Doces e Compotas', '500789012', '011', 'Spar'),
+	('Mel', '500789012', '012', 'Spar'),
+	('Nutella e Cremes de Barrar', '500789012', '013', 'Spar'),
+	('Atum', '500789012', '014', 'Spar'),
+	('Salsichas', '500789012', '015', 'Spar'),
+	('Patês', '500789012', '016', 'Spar'),
+	('Alternativas Vegetarianas', '500789012', '017', 'Spar'),
+	('Peixe Fresco', '500789012', '018', 'Spar'),
+	('Peixe Congelado', '500789012', '019', 'Spar'),
+	('Mariscos', '500789012', '020', 'Spar'),
+	('Porco', '500789012', '021', 'Spar'),
+	('Novilho, Vitela e Vitelão', '500789012', '022', 'Spar'),
+	('Frango e Peru', '500789012', '023', 'Spar'),
+	('Bebidas', '500789012', '024', 'Spar'),
+	('Saudável', '500789012', '025', 'Spar');
