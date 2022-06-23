@@ -20,7 +20,19 @@
     </nav>
     <h2>Adicionar nova categoria</h2>
     <form action="" method="post">
-      <p>Nome * <input type="text" name="category" /></p>
+      <div>
+        Nome *
+        <input
+          type="text"
+          name="category"
+          id="category"
+          oninput="checkName()"
+        />
+        <p style="color: red; display: none" id="warning_name">
+          O nome tem no máximo 50 caracteres!
+        </p>
+      </div>
+      <br />
       <p>
         <label>
           <input
@@ -53,6 +65,15 @@
         textBox.style.display = "initial";
       } else {
         textBox.style.display = "none";
+      }
+    }
+    function checkName() {
+      const category = document.getElementById("category");
+      const warning_name = document.getElementById("warning_name");
+      if (category.value.length > 50) {
+        warning_name.style.display = "initial";
+      } else {
+        warning_name.style.display = "none";
       }
     }
   </script>
