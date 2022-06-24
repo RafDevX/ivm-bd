@@ -94,13 +94,8 @@ def add_category_post():
             return redirect("/nerd-express.cgi/addcategory")
         query = "INSERT INTO categoria(nome) VALUES (%s);"
         if subswitch == "on":
-            query += "DELETE FROM categoria_simples WHERE nome=%s;\
-            DELETE FROM super_categoria WHERE nome=%s;\
-            INSERT INTO super_categoria(nome) VALUES (%s);\
-            INSERT INTO tem_outra(super_categoria, categoria) VALUES (%s, %s);"  
-            data += (super_category, super_category, super_category, super_category, category)
-        query += "INSERT INTO categoria_simples(nome) VALUES (%s);"
-        data += (category, )
+            query += "INSERT INTO tem_outra(super_categoria, categoria) VALUES (%s, %s);"  
+            data += (super_category, category)
         cursor.execute(query, data)
         return render_template("success.html", context="category")
     except Exception as e:
@@ -199,9 +194,8 @@ def delete_retailer():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        query = "DELETE FROM responsavel_por WHERE tin=(SELECT tin FROM retalhista WHERE name=%s);\
-        DELETE FROM retalhista WHERE name=%s;"
-        cursor.execute(query, (name, name))
+        query = "DELETE FROM retalhista WHERE name=%s;"
+        cursor.execute(query, (name, ))
         return render_template("success.html", context="retailer")
     except Exception as e:
         return render_template("error.html", error=e) #Renders a page with the error.
@@ -218,12 +212,8 @@ def delete_category():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        query = "DELETE FROM tem_outra WHERE super_categoria=%s;\
-        DELETE FROM tem_outra WHERE categoria=%s;\
-        DELETE FROM categoria_simples WHERE nome=%s;\
-        DELETE FROM super_categoria WHERE nome=%s;\
-        DELETE FROM categoria WHERE nome=%s;"
-        cursor.execute(query, (name, name, name, name, name))
+        query = "DELETE FROM categoria WHERE nome=%s;"
+        cursor.execute(query, (name,))
         return render_template("success.html", context="category")
     except Exception as e:
         return render_template("error.html", error=e) #Renders a page with the error.
