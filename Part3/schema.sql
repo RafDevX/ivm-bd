@@ -18,23 +18,17 @@ CREATE TABLE IF NOT EXISTS categoria (
 );
 
 CREATE TABLE IF NOT EXISTS categoria_simples (
-	nome VARCHAR(50) PRIMARY KEY,
-	FOREIGN KEY (nome) REFERENCES categoria(nome)
+	nome VARCHAR(50) PRIMARY KEY REFERENCES categoria(nome)
 );
 
 CREATE TABLE IF NOT EXISTS super_categoria (
-	nome VARCHAR(50) PRIMARY KEY,
-	FOREIGN KEY (nome) REFERENCES categoria(nome)
+	nome VARCHAR(50) PRIMARY KEY REFERENCES categoria(nome)
 );
 
 CREATE TABLE IF NOT EXISTS tem_outra (
-	super_categoria VARCHAR(50) NOT NULL,
-	categoria VARCHAR(50) NOT NULL,
-	PRIMARY KEY (categoria),
-	FOREIGN KEY (super_categoria) REFERENCES super_categoria(nome),
-	FOREIGN KEY (categoria) REFERENCES categoria(nome),
-	CHECK (super_categoria <> categoria),
-	UNIQUE (super_categoria, categoria)
+	super_categoria VARCHAR(50) NOT NULL REFERENCES super_categoria(nome),
+	categoria VARCHAR(50) PRIMARY KEY REFERENCES categoria(nome),
+	CHECK (super_categoria <> categoria)
 );
 
 CREATE TABLE IF NOT EXISTS produto (
@@ -45,11 +39,9 @@ CREATE TABLE IF NOT EXISTS produto (
 );
 
 CREATE TABLE IF NOT EXISTS tem_categoria (
-	ean CHAR(13) NOT NULL,
-	nome VARCHAR(50) NOT NULL,
-	PRIMARY KEY (ean, nome),
-	FOREIGN KEY (ean) REFERENCES produto(ean),
-	FOREIGN KEY (nome) REFERENCES categoria(nome)
+	ean CHAR(13) NOT NULL REFERENCES produto(ean),
+	nome VARCHAR(50) NOT NULL REFERENCES categoria(nome),
+	PRIMARY KEY (ean, nome)
 );
 
 CREATE TABLE IF NOT EXISTS IVM (
@@ -67,10 +59,9 @@ CREATE TABLE IF NOT EXISTS ponto_de_retalho (
 CREATE TABLE IF NOT EXISTS instalada_em (
 	num_serie VARCHAR(50) NOT NULL,
 	fabricante VARCHAR(50) NOT NULL,
-	local VARCHAR(200) NOT NULL,
+	local VARCHAR(200) NOT NULL REFERENCES ponto_de_retalho(nome),
 	PRIMARY KEY (num_serie, fabricante),
-	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante),
-	FOREIGN KEY (local) REFERENCES ponto_de_retalho(nome)
+	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante)
 );
 
 CREATE TABLE IF NOT EXISTS prateleira (
@@ -78,14 +69,13 @@ CREATE TABLE IF NOT EXISTS prateleira (
 	num_serie VARCHAR(50) NOT NULL,
 	fabricante VARCHAR(50) NOT NULL,
 	altura INT NOT NULL,
-	nome VARCHAR(50) NOT NULL,
+	nome VARCHAR(50) NOT NULL REFERENCES categoria(nome),
 	PRIMARY KEY (nro, num_serie, fabricante),
-	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante),
-	FOREIGN KEY (nome) REFERENCES categoria(nome)
+	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante)
 );
 
 CREATE TABLE IF NOT EXISTS planograma (
-	ean CHAR(13) NOT NULL,
+	ean CHAR(13) NOT NULL REFERENCES produto(ean),
 	nro INT NOT NULL,
 	num_serie VARCHAR(50) NOT NULL,
 	fabricante VARCHAR(50) NOT NULL,
@@ -93,7 +83,6 @@ CREATE TABLE IF NOT EXISTS planograma (
 	unidades INT NOT NULL,
 	loc VARCHAR(255),
 	PRIMARY KEY (ean, nro, num_serie, fabricante),
-	FOREIGN KEY (ean) REFERENCES produto(ean),
 	FOREIGN KEY (nro, num_serie, fabricante) REFERENCES prateleira(nro, num_serie, fabricante)
 );
 
@@ -103,14 +92,12 @@ CREATE TABLE IF NOT EXISTS retalhista (
 );
 
 CREATE TABLE IF NOT EXISTS responsavel_por (
-	nome_cat VARCHAR(50) NOT NULL,
-	tin CHAR(9) NOT NULL,
+	nome_cat VARCHAR(50) NOT NULL REFERENCES categoria(nome),
+	tin CHAR(9) NOT NULL REFERENCES retalhista(tin),
 	num_serie VARCHAR(50) NOT NULL,
 	fabricante VARCHAR(50) NOT NULL,
 	PRIMARY KEY (num_serie, fabricante),
-	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante),
-	FOREIGN KEY (tin) REFERENCES retalhista(tin),
-	FOREIGN KEY (nome_cat) REFERENCES categoria(nome)
+	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante)
 );
 
 CREATE TABLE IF NOT EXISTS evento_reposicao (
@@ -120,8 +107,7 @@ CREATE TABLE IF NOT EXISTS evento_reposicao (
 	fabricante VARCHAR(50) NOT NULL,
 	instante TIMESTAMP NOT NULL,
 	unidades INT NOT NULL,
-	tin CHAR(9) NOT NULL,
+	tin CHAR(9) NOT NULL REFERENCES retalhista(tin),
 	PRIMARY KEY (ean, nro, num_serie, fabricante, instante),
-	FOREIGN KEY (ean, nro, num_serie, fabricante) REFERENCES planograma(ean, nro, num_serie, fabricante),
-	FOREIGN KEY (tin) REFERENCES retalhista(tin)
+	FOREIGN KEY (ean, nro, num_serie, fabricante) REFERENCES planograma(ean, nro, num_serie, fabricante)
 );
