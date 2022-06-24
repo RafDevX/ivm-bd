@@ -1,38 +1,41 @@
-INSERT INTO IVM(num_serie, fabricante) VALUES ('ABCD', 'Aldi');
-INSERT INTO IVM(num_serie, fabricante) VALUES ('1234', 'Aldi');
-INSERT INTO IVM(num_serie, fabricante) VALUES ('ABCD', 'Lidl');
 INSERT INTO IVM(num_serie, fabricante) VALUES
-  ('001', 'Spar'),
-  ('002', 'Spar'),
-  ('003', 'Spar'),
-  ('004', 'Spar'),
-  ('005', 'Spar'),
-  ('006', 'Spar'),
-  ('007', 'Spar'),
-  ('008', 'Spar'),
-  ('009', 'Spar'),
-  ('010', 'Spar'),
-  ('011', 'Spar'),
-  ('012', 'Spar'),
-  ('013', 'Spar'),
-  ('014', 'Spar'),
-  ('015', 'Spar'),
-  ('016', 'Spar'),
-  ('017', 'Spar'),
-  ('018', 'Spar'),
-  ('019', 'Spar'),
-  ('020', 'Spar'),
-  ('021', 'Spar'),
-  ('022', 'Spar'),
-  ('023', 'Spar'),
-  ('024', 'Spar'),
-  ('025', 'Spar');
+	('ABCD', 'Aldi'),
+	('1234', 'Aldi'),
+	('ABCD', 'Lidl'),
+	('001', 'Spar'),
+	('002', 'Spar'),
+	('003', 'Spar'),
+	('004', 'Spar'),
+	('005', 'Spar'),
+	('006', 'Spar'),
+	('007', 'Spar'),
+	('008', 'Spar'),
+	('009', 'Spar'),
+	('010', 'Spar'),
+	('011', 'Spar'),
+	('012', 'Spar'),
+	('013', 'Spar'),
+	('014', 'Spar'),
+	('015', 'Spar'),
+	('016', 'Spar'),
+	('017', 'Spar'),
+	('018', 'Spar'),
+	('019', 'Spar'),
+	('020', 'Spar'),
+	('021', 'Spar'),
+	('022', 'Spar'),
+	('023', 'Spar'),
+	('024', 'Spar'),
+	('025', 'Spar');
 
-INSERT INTO ponto_de_retalho(nome, distrito, concelho) VALUES ('Galp Oeiras', 'Lisboa', 'Oeiras');
+INSERT INTO ponto_de_retalho(nome, distrito, concelho) VALUES
+	('Galp Oeiras', 'Lisboa', 'Oeiras'),
+	('Repsol Portimão', 'Faro', 'Portimão');
 
-INSERT INTO instalada_em(num_serie, fabricante, local) VALUES ('ABCD', 'Aldi', 'Galp Oeiras');
-INSERT INTO instalada_em(num_serie, fabricante, local) VALUES ('1234', 'Aldi', 'Galp Oeiras');
-INSERT INTO instalada_em(num_serie, fabricante, local) VALUES ('ABCD', 'Lidl', 'Galp Oeiras');
+INSERT INTO instalada_em(num_serie, fabricante, local) VALUES
+	('ABCD', 'Aldi', 'Galp Oeiras'),
+	('1234', 'Aldi', 'Galp Oeiras'),
+	('ABCD', 'Lidl', 'Galp Oeiras');
 
 INSERT INTO categoria(nome) VALUES
 	('Mercearia'),
@@ -103,40 +106,48 @@ INSERT INTO tem_outra(super_categoria, categoria) VALUES
 	('Iogurtes', 'Iogurtes Proteína'),
 	('Iogurtes', 'Iogurtes Gregos');
 
-INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (1, 'ABCD', 'Aldi', 120, 'Bebidas');
-INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (2, 'ABCD', 'Aldi', 220, 'Bebidas');
-INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (1, 'ABCD', 'Lidl', 100, 'Barras de Cereais');
-INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (1, '1234', 'Aldi', 300, 'Barras de Cereais');
-INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (3, '1234', 'Aldi', 120, 'Bebidas');
 
-INSERT INTO produto(ean, cat, descr) VALUES ('9002490100070', 'Bebidas', 'Ice Tea');
-INSERT INTO produto(ean, cat, descr) VALUES ('9002490100123', 'Bebidas', 'Água');
-INSERT INTO produto(ean, cat, descr) VALUES ('9002490100456', 'Doces e Compotas', 'Marmelada');
-INSERT INTO produto(ean, cat, descr) VALUES ('9002490100789', 'Barras de Cereais', 'Barritas');
+INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES
+	(1, 'ABCD', 'Aldi', 120, 'Bebidas'),
+	(2, 'ABCD', 'Aldi', 220, 'Bebidas'),
+	(1, 'ABCD', 'Lidl', 100, 'Barras de Cereais'),
+	(1, '1234', 'Aldi', 300, 'Barras de Cereais'),
+	(3, '1234', 'Aldi', 120, 'Bebidas');
 
-INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100123', 'Saudável');
-INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100789', 'Saudável');
 
-INSERT INTO planograma(ean, nro, num_serie, fabricante, faces, unidades, loc) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', 5, 10, 'Corredor 3');
-INSERT INTO planograma(ean, nro, num_serie, fabricante, faces, unidades, loc) VALUES ('9002490100070', 2, 'ABCD', 'Aldi', 6, 12, 'Corredor 1');
-INSERT INTO planograma(ean, nro, num_serie, fabricante, faces, unidades, loc) VALUES ('9002490100123', 1, 'ABCD', 'Aldi', 5, 12, 'Corredor 3');
-INSERT INTO planograma(ean, nro, num_serie, fabricante, faces, unidades, loc) VALUES ('9002490100789', 1, 'ABCD', 'Lidl', 6, 10, 'Cave 01');
-INSERT INTO planograma(ean, nro, num_serie, fabricante, faces, unidades, loc) VALUES ('9002490100789', 1, '1234', 'Aldi', 3, 23, 'Corredor 1');
+INSERT INTO produto(ean, cat, descr) VALUES
+	('9002490100070', 'Bebidas', 'Ice Tea'),
+	('9002490100123', 'Bebidas', 'Água'),
+	('9002490100456', 'Doces e Compotas', 'Marmelada'),
+	('9002490100789', 'Barras de Cereais', 'Barritas');
 
-INSERT INTO retalhista(tin, name) VALUES ('500123456', 'Galp');
-INSERT INTO retalhista(tin, name) VALUES ('500789012', 'Repsol');
-INSERT INTO retalhista(tin, name) VALUES ('500345678', 'Shell');
+INSERT INTO tem_categoria(ean, nome) VALUES
+	('9002490100123', 'Saudável'),
+	('9002490100789', 'Saudável');
 
-INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2020-06-14T15:24:21Z', 10, '500123456');
-INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2020-07-13T12:04:41Z', 01, '500123456');
-INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100070', 1, 'ABCD', 'Aldi', '2021-02-11T19:04:21Z', 04, '500789012');
-INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, 'ABCD', 'Lidl', '2022-03-13T08:09:12Z', 02, '500345678');
-INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, '1234', 'Aldi', '2022-03-13T08:09:13Z', 12, '500345678');
-INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES ('9002490100789', 1, '1234', 'Aldi', '2022-03-13T08:09:24Z', 13, '500345678');
+INSERT INTO planograma(ean, nro, num_serie, fabricante, faces, unidades, loc) VALUES
+	('9002490100070', 1, 'ABCD', 'Aldi', 5, 10, 'Corredor 3'),
+	('9002490100070', 2, 'ABCD', 'Aldi', 6, 12, 'Corredor 1'),
+	('9002490100123', 1, 'ABCD', 'Aldi', 5, 12, 'Corredor 3'),
+	('9002490100789', 1, 'ABCD', 'Lidl', 6, 10, 'Cave 01'),
+	('9002490100789', 1, '1234', 'Aldi', 3, 23, 'Corredor 1');
 
-INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Bebidas',  '500123456', 'ABCD', 'Lidl');
-INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES ('Saudável', '500345678', 'ABCD', 'Aldi');
+INSERT INTO retalhista(tin, name) VALUES
+	('500123456', 'Galp'),
+	('500789012', 'Repsol'),
+	('500345678', 'Shell');
+
+INSERT INTO evento_reposicao(ean, nro, num_serie, fabricante, instante, unidades, tin) VALUES
+	('9002490100070', 1, 'ABCD', 'Aldi', '2020-06-14T15:24:21Z', 10, '500123456'),
+	('9002490100070', 1, 'ABCD', 'Aldi', '2020-07-13T12:04:41Z', 01, '500123456'),
+	('9002490100070', 1, 'ABCD', 'Aldi', '2021-02-11T19:04:21Z', 04, '500789012'),
+	('9002490100789', 1, 'ABCD', 'Lidl', '2022-03-13T08:09:12Z', 02, '500345678'),
+	('9002490100789', 1, '1234', 'Aldi', '2022-03-13T08:09:13Z', 12, '500345678'),
+	('9002490100789', 1, '1234', 'Aldi', '2022-03-13T08:09:24Z', 13, '500345678');
+
 INSERT INTO responsavel_por(nome_cat, tin, num_serie, fabricante) VALUES
+	('Bebidas',  '500123456', 'ABCD', 'Lidl'),
+	('Saudável', '500345678', 'ABCD', 'Aldi'),
 	('Ovos', '500789012', '001', 'Spar'),
 	('Leite Magro', '500789012', '002', 'Spar'),
 	('Leite Meio Gordo', '500789012', '003', 'Spar'),
