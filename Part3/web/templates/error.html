@@ -29,16 +29,20 @@
     </div>
     <article align="center">
       {% if "23505" in error.pgcode and context == "category" %}ERRO: O nome da
-      categoria deve ser único {% endif %} {% if "23505" in error.pgcode and
-      context == "retailer" %}ERRO: O nome e TIN do retalhista devem ser únicos
-      {% else %} ERRO: {{ error.pgcode }} {% endif %}
+      categoria deve ser único {% elif "23505" in error.pgcode and context ==
+      "responsabilities" %}ERRO: Já existe um retalhista responsável pela
+      categoria selecionada, na IVM selecionada. {% elif "23505" in error.pgcode
+      and context == "retailer" %}ERRO: O nome e TIN do retalhista devem ser
+      únicos {% else %} ERRO: {{ error.pgcode }} {% endif %}
     </article>
     <br />
     <br />
     <p>
       {% if context == "category" %}
-      <a href="addcategory" role="button">Voltar</a> {% endif %} {% if context
-      == "retailer" %} <a href="addretailer" role="button">Voltar</a>{% endif %}
+      <a href="addcategory" role="button">Voltar</a> {% elif context ==
+      "retailer" %} <a href="addretailer" role="button">Voltar</a> {% elif
+      context == "responsabilities" %}
+      <a href="retailers" role="button">Voltar</a> {% endif %}
       &nbsp;&nbsp;&nbsp;&nbsp;
       <a href="/nerd-express.cgi/" role="button">Página Inicial</a>
     </p>
