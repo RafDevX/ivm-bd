@@ -74,10 +74,12 @@ $$
 BEGIN
 	DELETE FROM produto WHERE cat = OLD.nome;
 	/* TODO: continue... */
+	
+	RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
 
 DROP TRIGGER IF EXISTS trigger_remove_cat_deps ON categoria;
 CREATE TRIGGER trigger_remove_cat_deps
-	AFTER DELETE ON categoria
+	BEFORE DELETE ON categoria
 	FOR EACH ROW EXECUTE PROCEDURE remove_cat_deps();
