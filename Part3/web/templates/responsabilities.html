@@ -30,6 +30,7 @@
           <th>Categoria</th>
           <th><abbr title="Número">Núm.</abbr> Série</th>
           <th>Fabricante</th>
+          <th>Apagar</th>
         </tr>
       </thead>
       <tbody>
@@ -38,7 +39,16 @@
           <td>{{ record[1] }}</td>
           <td>{{ record[2] }}</td>
           <td>{{ record[3] }}</td>
+          <td>
+            <a
+              href="deleteresponsability?serial={{ record[2] }}&manuf={{ record[3] }}"
+              role="button"
+              class="contrast"
+              >Apagar Responsabilidade</a
+            >
+          </td>
         </tr>
+
         {% endfor %}
       </tbody>
     </table>

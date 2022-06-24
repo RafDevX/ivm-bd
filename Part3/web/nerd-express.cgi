@@ -295,4 +295,23 @@ def addresponsabilities_post():
         cursor.close()
         dbConn.close() 
 
+@app.route('/deleteresponsability')
+def delete_responsability():
+    dbConn=None
+    cursor=None
+    serial = request.args.get("serial")
+    manuf = request.args.get("manuf")
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+        query = "DELETE FROM responsavel_por WHERE num_serie=%s AND fabricante=%s;"
+        cursor.execute(query, (serial, manuf))
+        return render_template("success.html", context="retailer")
+    except Exception as e:
+        return render_template("error.html", error=e, context="responsabilities") #Renders a page with the error.
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
 CGIHandler().run(app)
