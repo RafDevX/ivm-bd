@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+    <title>Nerd Express | IVMs</title>
+  </head>
+  <body style="padding: 20px">
+    {% if cursor %}
+    <nav>
+      <ul>
+        <li><a href="/nerd-express.cgi/">Voltar </a></li>
+      </ul>
+      <ul>
+        <li><a href="/nerd-express.cgi/">Página Inicial </a></li>
+      </ul>
+    </nav>
+    <h2>Lista de IVMs</h2>
+    <table>
+      <thead>
+        <tr>
+          <th><abbr title="Número">Núm.</abbr> Série</th>
+          <th>Fabricante</th>
+          <th>Listar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in cursor %}
+        <tr>
+          <td>{{ record[0] }}</td>
+          <td>{{ record[1] }}</td>
+          <td>
+            <a
+              href="replenishmentevents?serial={{ record[0] }}&manuf={{ record[1] }}"
+              role="button"
+              >Listar eventos de reposição
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>Erro: não foi possível obter dados da base de dados!</p>
+    {% endif %}
+  </body>
+</html>

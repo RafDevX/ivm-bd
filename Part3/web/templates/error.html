@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+    <title>Nerd Express | Erro</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      div {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body style="padding: 20px">
+    <h1>Infelizmente não foi possível efetuar a operação :(</h1>
+    <div>
+      <img
+        src="https://acegif.com/wp-content/gifs/sad-cat-60.gif"
+        width="20%"
+      />
+    </div>
+    <article align="center">
+      {% if "23505" in error.pgcode and context == "category" %}ERRO: O nome da
+      categoria deve ser único {% elif "23505" in error.pgcode and context ==
+      "responsabilities" %}ERRO: Já existe um retalhista responsável pela
+      categoria selecionada, na IVM selecionada. {% elif "23505" in error.pgcode
+      and context == "retailer" %}ERRO: O nome e TIN do retalhista devem ser
+      únicos {% else %} ERRO: {{ error.pgcode }} {% endif %}
+    </article>
+    <br />
+    <br />
+    <p>
+      {% if context == "category" %}
+      <a href="addcategory" role="button">Voltar</a> {% elif context ==
+      "retailer" %} <a href="addretailer" role="button">Voltar</a> {% elif
+      context == "responsabilities" %}
+      <a href="retailers" role="button">Voltar</a> {% endif %}
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/nerd-express.cgi/" role="button">Página Inicial</a>
+    </p>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+    <title>Nerd Express | Responsabilidades</title>
+  </head>
+  <body style="padding: 20px">
+    {% if cursor %}
+    <nav>
+      <ul>
+        <li><a href="retailers">Voltar </a></li>
+      </ul>
+      <ul>
+        <li><a href="/nerd-express.cgi/">Página Inicial </a></li>
+      </ul>
+    </nav>
+    <h2>Lista de Responsabilidades do Retalhista {{ params.get("name") }}</h2>
+    <a href="addresponsabilities?name={{ params.get('name') }}" role="button"
+      >Adicionar Responsabilidade</a
+    >
+    <br />
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th><abbr title="Número">Núm.</abbr> Série</th>
+          <th>Fabricante</th>
+          <th>Apagar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in cursor %}
+        <tr>
+          <td>{{ record[1] }}</td>
+          <td>{{ record[2] }}</td>
+          <td>{{ record[3] }}</td>
+          <td>
+            <a
+              href="deleteresponsability?serial={{ record[2] }}&manuf={{ record[3] }}"
+              role="button"
+              class="contrast"
+              >Apagar Responsabilidade</a
+            >
+          </td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>Erro: não foi possível obter dados da base de dados!</p>
+    {% endif %}
+  </body>
+</html>
