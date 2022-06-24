@@ -14,62 +14,61 @@ DROP TABLE IF EXISTS responsavel_por CASCADE;
 DROP TABLE IF EXISTS evento_reposicao CASCADE;
 
 CREATE TABLE IF NOT EXISTS categoria (
-	nome VARCHAR(50) PRIMARY KEY
+	nome VARCHAR(255) PRIMARY KEY
 );
 
 CREATE TABLE IF NOT EXISTS categoria_simples (
-	nome VARCHAR(50) PRIMARY KEY REFERENCES categoria(nome)
+	nome VARCHAR(255) PRIMARY KEY REFERENCES categoria(nome)
 );
 
 CREATE TABLE IF NOT EXISTS super_categoria (
-	nome VARCHAR(50) PRIMARY KEY REFERENCES categoria(nome)
+	nome VARCHAR(255) PRIMARY KEY REFERENCES categoria(nome)
 );
 
 CREATE TABLE IF NOT EXISTS tem_outra (
-	super_categoria VARCHAR(50) NOT NULL REFERENCES super_categoria(nome),
-	categoria VARCHAR(50) PRIMARY KEY REFERENCES categoria(nome),
+	super_categoria VARCHAR(255) NOT NULL REFERENCES super_categoria(nome),
+	categoria VARCHAR(255) PRIMARY KEY REFERENCES categoria(nome),
 	CHECK (super_categoria <> categoria)
 );
 
 CREATE TABLE IF NOT EXISTS produto (
 	ean CHAR(13) PRIMARY KEY,
-	cat VARCHAR(50) NOT NULL,
-	descr VARCHAR(255) NOT NULL,
-	FOREIGN KEY (cat) REFERENCES categoria(nome)
+	cat VARCHAR(255) NOT NULL REFERENCES categoria(nome),
+	descr VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tem_categoria (
 	ean CHAR(13) NOT NULL REFERENCES produto(ean),
-	nome VARCHAR(50) NOT NULL REFERENCES categoria(nome),
+	nome VARCHAR(255) NOT NULL REFERENCES categoria(nome),
 	PRIMARY KEY (ean, nome)
 );
 
 CREATE TABLE IF NOT EXISTS IVM (
-	num_serie VARCHAR(50) NOT NULL,
-	fabricante VARCHAR(50) NOT NULL,
+	num_serie VARCHAR(255) NOT NULL,
+	fabricante VARCHAR(255) NOT NULL,
 	PRIMARY KEY (num_serie, fabricante)
 );
 
 CREATE TABLE IF NOT EXISTS ponto_de_retalho (
-	nome VARCHAR(50) PRIMARY KEY,
-	distrito VARCHAR(50) NOT NULL,
-	concelho VARCHAR(50) NOT NULL
+	nome VARCHAR(255) PRIMARY KEY,
+	distrito VARCHAR(255) NOT NULL,
+	concelho VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS instalada_em (
-	num_serie VARCHAR(50) NOT NULL,
-	fabricante VARCHAR(50) NOT NULL,
-	local VARCHAR(200) NOT NULL REFERENCES ponto_de_retalho(nome),
+	num_serie VARCHAR(255) NOT NULL,
+	fabricante VARCHAR(255) NOT NULL,
+	local VARCHAR(255) NOT NULL REFERENCES ponto_de_retalho(nome),
 	PRIMARY KEY (num_serie, fabricante),
 	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante)
 );
 
 CREATE TABLE IF NOT EXISTS prateleira (
 	nro INT NOT NULL,
-	num_serie VARCHAR(50) NOT NULL,
-	fabricante VARCHAR(50) NOT NULL,
+	num_serie VARCHAR(255) NOT NULL,
+	fabricante VARCHAR(255) NOT NULL,
 	altura INT NOT NULL,
-	nome VARCHAR(50) NOT NULL REFERENCES categoria(nome),
+	nome VARCHAR(255) NOT NULL REFERENCES categoria(nome),
 	PRIMARY KEY (nro, num_serie, fabricante),
 	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante)
 );
@@ -77,8 +76,8 @@ CREATE TABLE IF NOT EXISTS prateleira (
 CREATE TABLE IF NOT EXISTS planograma (
 	ean CHAR(13) NOT NULL REFERENCES produto(ean),
 	nro INT NOT NULL,
-	num_serie VARCHAR(50) NOT NULL,
-	fabricante VARCHAR(50) NOT NULL,
+	num_serie VARCHAR(255) NOT NULL,
+	fabricante VARCHAR(255) NOT NULL,
 	faces INT NOT NULL,
 	unidades INT NOT NULL,
 	loc VARCHAR(255),
@@ -88,14 +87,14 @@ CREATE TABLE IF NOT EXISTS planograma (
 
 CREATE TABLE IF NOT EXISTS retalhista (
 	tin CHAR(9) PRIMARY KEY,
-	name VARCHAR(50) NOT NULL UNIQUE
+	name VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS responsavel_por (
-	nome_cat VARCHAR(50) NOT NULL REFERENCES categoria(nome),
+	nome_cat VARCHAR(255) NOT NULL REFERENCES categoria(nome),
 	tin CHAR(9) NOT NULL REFERENCES retalhista(tin),
-	num_serie VARCHAR(50) NOT NULL,
-	fabricante VARCHAR(50) NOT NULL,
+	num_serie VARCHAR(255) NOT NULL,
+	fabricante VARCHAR(255) NOT NULL,
 	PRIMARY KEY (num_serie, fabricante),
 	FOREIGN KEY (num_serie, fabricante) REFERENCES IVM(num_serie, fabricante)
 );
@@ -103,8 +102,8 @@ CREATE TABLE IF NOT EXISTS responsavel_por (
 CREATE TABLE IF NOT EXISTS evento_reposicao (
 	ean CHAR(13) NOT NULL,
 	nro INT NOT NULL,
-	num_serie VARCHAR(50) NOT NULL,
-	fabricante VARCHAR(50) NOT NULL,
+	num_serie VARCHAR(255) NOT NULL,
+	fabricante VARCHAR(255) NOT NULL,
 	instante TIMESTAMP NOT NULL,
 	unidades INT NOT NULL,
 	tin CHAR(9) NOT NULL REFERENCES retalhista(tin),
