@@ -123,10 +123,10 @@ BEGIN
   IF NOT EXISTS (
     SELECT super_categoria
     FROM tem_outra
-    WHERE super_categoria = OLD.super_categoria
+    WHERE super_categoria = OLD.nome
   ) THEN
-    DELETE FROM super_categoria WHERE nome = OLD.super_categoria;
-    INSERT INTO categoria_simples(nome) VALUES (OLD.super_categoria);
+    DELETE FROM super_categoria WHERE nome = OLD.nome;
+    INSERT INTO categoria_simples(nome) VALUES (OLD.nome);
   END IF;
 
   RETURN OLD;
@@ -135,7 +135,7 @@ $$ LANGUAGE plpgsql;
 
 DROP TRIGGER IF EXISTS trigger_demote_cat ON tem_outra;
 CREATE TRIGGER trigger_demote_cat
-  AFTER DELETE ON tem_outra
+  AFTER DELETE ON super_categoria
   FOR EACH ROW EXECUTE PROCEDURE demote_cat();
 
 /* Quando uma categoria é apagada, apagar tudo o que depende dela */
