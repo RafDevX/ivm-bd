@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+    <title>Nerd Express | Sucesso!</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      div {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body style="padding: 20px">
+    <h1>Operação efetuada com sucesso!</h1>
+    <div>
+      <img
+        src="https://media.discordapp.net/attachments/948327128024383508/961712313839263744/6bsdr8.gif"
+        width="20%"
+      />
+    </div>
+    <br />
+    <br />
+    <p>
+      {% if context == "category" %}
+      <a href="categories" role="button">Voltar</a> {% endif %} {% if context ==
+      "retailer" %} <a href="retailers" role="button">Voltar</a> {% endif %}
+      &nbsp;&nbsp;&nbsp;&nbsp;<a href="/nerd-express.cgi/" role="button"
+        >Página Inicial</a
+      >
+    </p>
+  </body>
+</html>

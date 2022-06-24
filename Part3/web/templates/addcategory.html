@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+    <title>Nerd Express | Adicionar Categoria</title>
+  </head>
+  <body style="padding: 20px">
+    {% if cursor %}
+    <nav>
+      <ul>
+        <li><a href="categories">Voltar </a></li>
+      </ul>
+      <ul>
+        <li><a href="/nerd-express.cgi/">Página Inicial </a></li>
+      </ul>
+    </nav>
+    <h2>Adicionar nova categoria</h2>
+    <form action="" method="post">
+      <div>
+        <input
+          type="text"
+          placeholder="Nome"
+          name="category"
+          id="category"
+          maxlength="255"
+          oninput="checkName()"
+        />
+      </div>
+      <br />
+      <p>
+        <label>
+          <input
+            type="checkbox"
+            id="subswitch"
+            name="subswitch"
+            role="switch"
+            onchange="checkOption()"
+            maxlength="255"
+          />
+          Sub-categoria
+        </label>
+      </p>
+      <p id="supercategoryName" style="display: none">
+        <label>Nome da super-categoria</label>
+        <select name="supercategory">
+          {% for record in cursor %}
+          <option value="{{ record[0] }}">{{ record[0] }}</option>
+          {% endfor %}
+        </select>
+      </p>
+      <p><input type="submit" id="submit" value="Submeter" disabled /></p>
+    </form>
+    {% endif %}
+  </body>
+  <script>
+    function checkOption() {
+      const textBox = document.getElementById("supercategoryName");
+
+      if (textBox.style.display == "none") {
+        textBox.style.display = "initial";
+      } else {
+        textBox.style.display = "none";
+      }
+    }
+    function checkName() {
+      const category = document.getElementById("category");
+      const submit = document.getElementById("submit");
+      if (category.value.length == 0) {
+        submit.disabled = true;
+      } else {
+        warning_name.style.display = "none";
+        submit.disabled = false;
+      }
+    }
+  </script>
+</html>
