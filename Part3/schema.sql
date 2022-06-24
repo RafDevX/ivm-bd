@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS tem_outra (
 );
 
 CREATE TABLE IF NOT EXISTS produto (
-	ean CHAR(13) PRIMARY KEY,
+	ean CHAR(13) PRIMARY KEY CHECK (ean ~ '^\d{13}$'),
 	cat VARCHAR(255) NOT NULL REFERENCES categoria(nome),
 	descr VARCHAR(255) NOT NULL
 );
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS planograma (
 );
 
 CREATE TABLE IF NOT EXISTS retalhista (
-	tin CHAR(9) PRIMARY KEY,
+	tin CHAR(9) PRIMARY KEY CHECK (tin ~ '^\d{9}$'),
 	name VARCHAR(255) NOT NULL UNIQUE
 );
 
