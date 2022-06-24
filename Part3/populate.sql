@@ -149,10 +149,10 @@ INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (1, 'ABC
 INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (1, '1234', 'Aldi', 300, 'Barras de Cereais');
 INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (3, '1234', 'Aldi', 120, 'Bebidas');
 
-INSERT INTO produto(ean, descr) VALUES ('9002490100070', 'Ice Tea');
-INSERT INTO produto(ean, descr) VALUES ('9002490100123', 'Água');
-INSERT INTO produto(ean, descr) VALUES ('9002490100456', 'Marmelada');
-INSERT INTO produto(ean, descr) VALUES ('9002490100789', 'Barritas');
+INSERT INTO produto(ean, cat, descr) VALUES ('9002490100070', 'A', 'Ice Tea');
+INSERT INTO produto(ean, cat, descr) VALUES ('9002490100123', 'A', 'Água');
+INSERT INTO produto(ean, cat, descr) VALUES ('9002490100456', 'B', 'Marmelada');
+INSERT INTO produto(ean, cat, descr) VALUES ('9002490100789', 'C', 'Barritas');
 
 INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100070', 'Bebidas');
 INSERT INTO tem_categoria(ean, nome) VALUES ('9002490100123', 'Bebidas');

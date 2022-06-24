@@ -1,33 +1,42 @@
-/*
-7.1
-SELECT DISTINCT R.name
-FROM retalhista R, responsavel_por P
-WHERE R.tin = P.tin AND P.nome_cat = 'Frutos'
+DROP INDEX IF EXISTS tin_index;
+DROP INDEX IF EXISTS nome_cat_index;
+DROP INDEX IF EXISTS cat_index;
+DROP INDEX IF EXISTS descr_index;
 
-not sure se o SELECT DISTINCT consegue usar o index
-we'll find out once DSI fixes its shit
+/* 7.1 
+O SELECT DISTINCT benificia de um indice para name em retalhista.
+No entanto, o postgresql já cria este indice devido à UNIQUE constraint da coluna.
 
-tin é primary key, logo já tem um B-TREE(tin) index
+Na comparação R.tin = P.tin, R.tin é uma Primary key pelo que não é necessário criar um indice.
+P.tin é um Foreign key, pelo que criamos um indice do mesmo tipo que o usado por R.tin, B-TREE.
 
-a query combina indices pelo que queremos usar o mesmo tipo de index para nome_cat e tin
+P.nome_cat = 'Frutos' é uma comparação simples para a qual o indice do tipo HASH é o mais apropriado.
 */
-CREATE INDEX name_index ON retalhista USING HASH(name)
-CREATE INDEX nome_cat_index ON responsavel_por USING BTREE(nome_cat)
 
-/*
-7.2
-SELECT T.nome, count(T.ean)
-FROM produto P, tem_categoria T
-WHERE P.cat = T.nome AND P.desc like 'A%'
-GROUP BY T.nome
+CREATE INDEX tin_index ON responsavel_por USING BTREE(tin);
+CREATE INDEX nome_cat_index ON responsavel_por USING HASH(nome_cat);
 
-o correia diz que o GROUP BY é melhor com B-TREE mas não encontro a fonte.
-uma possibilidade é ele lido isto (https://www.postgresql.org/docs/current/indexes-ordering.html) e confundido com GROUP BY
-caso não se encontre a fonte deviamos usar o HASH
+EXPLAIN ANALYZE SELECT DISTINCT R.name
+  FROM retalhista R, responsavel_por P
+  WHERE R.tin = P.tin AND P.nome_cat = 'Frutos';
 
-o LIKE necessita de B-TREE index
+/* 7.2
+O GROUP BY T.nome benificia de um indice em tem_categoria para nome.
+No entanto, o postgresql já cria um indice para (ean, nome) porque se trata da primary key.
+O planner é capaz de usar este indice, pelo que não se justifica criar outro.
 
-should we index P.cat?
+Na comparação P.cat = T.nome, T.nome já tem um indice utilizável.
+Criamos para P.cat um indice do mesmo tipo que o usado por T.nome, B-TREE.
+
+Na comparação P.descr like 'A%', criamos um indice do tipo B-TREE para descr em produto.
+Indices do tipo B-TREE são capazes de agilizar operações de pattern matching.  
 */
-CREATE INDEX nome_index ON tem_categoria USING HASH(nome)
-CREATE INDEX desc_index ON produto USING BTREE(desc)
+
+CREATE INDEX cat_index ON produto USING BTREE(cat);
+CREATE INDEX descr_index ON produto USING BTREE(descr);
+
+EXPLAIN ANALYZE SELECT T.nome, count(T.ean)
+  FROM produto P, tem_categoria T
+  WHERE P.cat = T.nome AND P.descr like 'A%'
+  GROUP BY T.nome;
+
