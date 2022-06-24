@@ -102,7 +102,7 @@ def add_category_post():
         query += "INSERT INTO categoria_simples(nome) VALUES (%s);"
         data += (category, )
         cursor.execute(query, data)
-        return render_template("success.html")
+        return render_template("success.html", context="category")
     except Exception as e:
         return render_template("error.html", error=e, context="category") #Renders a page with the error.
     finally:
@@ -183,7 +183,7 @@ def add_retailer_post():
             return redirect("/nerd-express.cgi/addretailer")
         query = "INSERT INTO retalhista(tin, name) VALUES (%s, %s)"
         cursor.execute(query, data)
-        return render_template("success.html")
+        return render_template("success.html", context="retailer")
     except Exception as e:
         return render_template("error.html", error=e, context="retailer") #Renders a page with the error.
     finally:
@@ -202,7 +202,7 @@ def delete_retailer():
         query = "DELETE FROM responsavel_por WHERE tin=(SELECT tin FROM retalhista WHERE name=%s);\
         DELETE FROM retalhista WHERE name=%s;"
         cursor.execute(query, (name, name))
-        return render_template("success.html")
+        return render_template("success.html", context="retailer")
     except Exception as e:
         return render_template("error.html", error=e) #Renders a page with the error.
     finally:
@@ -224,7 +224,7 @@ def delete_category():
         DELETE FROM super_categoria WHERE nome=%s;\
         DELETE FROM categoria WHERE nome=%s;"
         cursor.execute(query, (name, name, name, name, name))
-        return render_template("success.html")
+        return render_template("success.html", context="category")
     except Exception as e:
         return render_template("error.html", error=e) #Renders a page with the error.
     finally:
