@@ -127,8 +127,11 @@ CREATE OR REPLACE FUNCTION remove_cat_deps() RETURNS TRIGGER AS
 $$
 BEGIN
 	DELETE FROM produto WHERE cat = OLD.nome;
-	/* TODO: continue... */
-	
+  DELETE FROM tem_outra WHERE super_categoria = OLD.nome OR categoria = OLD.nome;
+	DELETE FROM super_categoria WHERE nome = OLD.nome;
+	DELETE FROM categoria_simples WHERE nome = OLD.nome;
+  DELETE FROM responsavel_por WHERE nome_cat = OLD.nome;
+  DELETE FROM prateleira WHERE nome = OLD.nome;
 	RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
@@ -137,6 +140,49 @@ DROP TRIGGER IF EXISTS trigger_remove_cat_deps ON categoria;
 CREATE TRIGGER trigger_remove_cat_deps
 	BEFORE DELETE ON categoria
 	FOR EACH ROW EXECUTE PROCEDURE remove_cat_deps();
+
+/* Quando um produto é apagada, apagar tudo o que depende dela */
+CREATE OR REPLACE FUNCTION remove_prod_deps() RETURNS TRIGGER AS
+$$
+BEGIN
+  DELETE FROM planograma WHERE ean = OLD.ean;
+  DELETE FROM tem_categoria WHERE ean = OLD.ean;
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_remove_prod_deps ON produto;
+CREATE TRIGGER trigger_remove_prod_deps
+  BEFORE DELETE ON produto
+  FOR EACH ROW EXECUTE PROCEDURE remove_prod_deps();
+
+/* Quando um prateleira é apagada, apagar tudo o que depende dela */
+CREATE OR REPLACE FUNCTION remove_shelf_deps() RETURNS TRIGGER AS
+$$
+BEGIN
+  DELETE FROM planograma WHERE nro = OLD.nro AND num_serie = OLD.num_serie AND fabricante = OLD.fabricante;
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_remove_shelf_deps ON prateleira;
+CREATE TRIGGER trigger_remove_shelf_deps
+  BEFORE DELETE ON prateleira
+  FOR EACH ROW EXECUTE PROCEDURE remove_shelf_deps();
+
+/* Quando um planograma é apagado, apagar tudo o que depende dele */
+CREATE OR REPLACE FUNCTION remove_planogram_deps() RETURNS TRIGGER AS
+$$
+BEGIN
+  DELETE FROM evento_reposicao WHERE ean = OLD.ean AND nro = OLD.nro AND num_serie = OLD.num_serie AND fabricante = OLD.fabricante;
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_remove_planogram_deps ON planograma;
+CREATE TRIGGER trigger_remove_planogram_deps
+  BEFORE DELETE ON planograma
+  FOR EACH ROW EXECUTE PROCEDURE remove_planogram_deps();
 
 /* Quando um retailer é apagado, apagar tudo o que deptende dele */
 
