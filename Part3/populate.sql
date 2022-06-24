@@ -71,45 +71,6 @@ INSERT INTO categoria(nome) VALUES
 	('Bebidas'),
 	('Saudável');
 
-INSERT INTO categoria_simples(nome) VALUES
-	('Ovos'),
-	('Leite Magro'),
-	('Leite Meio Gordo'),
-	('Leite Gordo'),
-	('Iogurtes Líquidos'),
-	('Iogurtes Proteína'),
-	('Iogurtes Gregos'),
-	('Cereais Linha e Fibra'),
-	('Muesli e Granola'),
-	('Barras de Cereais'),
-	('Doces e Compotas'),
-	('Mel'),
-	('Nutella e Cremes de Barrar'),
-	('Atum'),
-	('Salsichas'),
-	('Patês'),
-	('Alternativas Vegetarianas'),
-	('Peixe Fresco'),
-	('Peixe Congelado'),
-	('Mariscos'),
-	('Porco'),
-	('Novilho, Vitela e Vitelão'),
-	('Frango e Peru'),
-	('Bebidas'),
-	('Saudável');
-
-INSERT INTO super_categoria(nome) VALUES
-	('Mercearia'),
-	('Cereais e Barras'),
-	('Compotas, Cremes e Mel'),
-	('Conservas'),
-	('Peixaria e Talho'),
-	('Peixaria'),
-	('Talho'),
-	('Lacticínios e Ovos'),
-	('Leite'),
-	('Iogurtes');
-
 INSERT INTO tem_outra(super_categoria, categoria) VALUES
 	('Mercearia', 'Cereais e Barras'),
 	('Cereais e Barras', 'Cereais Linha e Fibra'),
@@ -141,7 +102,6 @@ INSERT INTO tem_outra(super_categoria, categoria) VALUES
 	('Iogurtes', 'Iogurtes Líquidos'),
 	('Iogurtes', 'Iogurtes Proteína'),
 	('Iogurtes', 'Iogurtes Gregos');
-
 
 INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (1, 'ABCD', 'Aldi', 120, 'Bebidas');
 INSERT INTO prateleira(nro, num_serie, fabricante, altura, nome) VALUES (2, 'ABCD', 'Aldi', 220, 'Bebidas');

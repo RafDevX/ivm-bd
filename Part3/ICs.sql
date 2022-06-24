@@ -82,6 +82,39 @@ CREATE TRIGGER trigger_add_new_cat
   AFTER UPDATE OR INSERT ON categoria
   FOR EACH ROW EXECUTE PROCEDURE add_new_cat();
 
+/* Quando uma relacao de categoria é criada, promover a super_categoria */
+
+CREATE OR REPLACE FUNCTION promote_cat() RETURNS TRIGGER AS
+$$
+BEGIN
+  DELETE FROM categoria_simples WHERE nome = NEW.super_categoria;
+  INSERT INTO super_categoria(nome) VALUES (NEW.super_categoria) ON CONFLICT DO NOTHING;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_promote_cat ON tem_outra;
+CREATE TRIGGER trigger_promote_cat
+  BEFORE UPDATE OR INSERT ON tem_outra
+  FOR EACH ROW EXECUTE PROCEDURE promote_cat();
+
+/* Quando a ultima relacao de uma categoria é apagada, despromover a categoria_simples */
+
+CREATE OR REPLACE FUNCTION demote_cat() RETURNS TRIGGER AS
+$$
+BEGIN
+  IF NOT EXISTS (
+    SELECT super_categoria
+    FROM tem_outra
+    WHERE super_categoria = OLD.super_categoria
+  ) THEN
+    DELETE FROM super_categoria WHERE nome = OLD.super_categoria;
+    INSERT INTO categoria_simples(nome) VALUES (OLD.super_categoria);
+  END IF;
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
 /* Quando uma categoria é apagada, apagar tudo o que depende dela */
 
 CREATE OR REPLACE FUNCTION remove_cat_deps() RETURNS TRIGGER AS
