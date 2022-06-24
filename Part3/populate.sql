@@ -29,7 +29,8 @@ INSERT INTO IVM(num_serie, fabricante) VALUES
 	('025', 'Spar');
 
 INSERT INTO ponto_de_retalho(nome, distrito, concelho) VALUES
-	('Galp Oeiras', 'Lisboa', 'Oeiras');
+	('Galp Oeiras', 'Lisboa', 'Oeiras'),
+	('Repsol Portimão', 'Faro', 'Portimão');
 
 INSERT INTO instalada_em(num_serie, fabricante, local) VALUES
 	('ABCD', 'Aldi', 'Galp Oeiras'),
