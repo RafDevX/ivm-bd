@@ -4,7 +4,7 @@ SELECT name
   NATURAL JOIN responsavel_por 
   GROUP BY tin 
   HAVING COUNT(tin) >= ALL (
-    SELECT COUNT(tin) 
+    SELECT COUNT(DISTINCT nome_cat)
     FROM responsavel_por 
     GROUP BY tin
 );
