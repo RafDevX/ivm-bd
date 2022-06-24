@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS planograma (
 );
 
 CREATE TABLE IF NOT EXISTS retalhista (
-	tin CHAR(9) PRIMARY KEY CHECK (tin ~ '^\d{9}$'),
+	tin CHAR(9) PRIMARY KEY CHECK (tin ~ '^[1235689]\d{8}$'),
 	name VARCHAR(255) NOT NULL UNIQUE
 );
 
