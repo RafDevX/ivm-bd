@@ -3,7 +3,7 @@ CREATE OR REPLACE FUNCTION chk_cat_owns_self() RETURNS TRIGGER AS
 $$
 BEGIN 
   IF NEW.super_categoria = NEW.categoria THEN
-    RAISE EXCEPTION 'A category cant have itself';
+    RAISE EXCEPTION 'A category cannot contain itself';
   END IF;
 
   RETURN NEW;
