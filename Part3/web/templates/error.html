@@ -31,7 +31,7 @@
       {% if "23505" in error.pgcode and context == "category" %}ERRO: O nome da
       categoria deve ser único {% endif %} {% if "23505" in error.pgcode and
       context == "retailer" %}ERRO: O nome e TIN do retalhista devem ser únicos
-      {% endif %}
+      {% else %} ERRO: {{ error.pgcode }} {% endif %}
     </article>
     <br />
     <br />
