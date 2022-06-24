@@ -115,6 +115,12 @@ BEGIN
   RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_demote_cat ON tem_outra;
+CREATE TRIGGER trigger_demote_cat
+  AFTER DELETE ON tem_outra
+  FOR EACH ROW EXECUTE PROCEDURE demote_cat();
+
 /* Quando uma categoria é apagada, apagar tudo o que depende dela */
 
 CREATE OR REPLACE FUNCTION remove_cat_deps() RETURNS TRIGGER AS
