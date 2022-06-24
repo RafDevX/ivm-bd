@@ -6,49 +6,38 @@
       rel="stylesheet"
       href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
     />
-    <title>Nerd Express | Retalhistas</title>
+    <title>Nerd Express | Responsabilidades</title>
   </head>
   <body style="padding: 20px">
     {% if cursor %}
     <nav>
       <ul>
-        <li><a href="/nerd-express.cgi/">Voltar </a></li>
+        <li><a href="retailers">Voltar </a></li>
       </ul>
       <ul>
         <li><a href="/nerd-express.cgi/">Página Inicial </a></li>
       </ul>
     </nav>
-    <h2>Lista de Retalhistas</h2>
-    <a href="addretailer" role="button">Adicionar Retalhista</a>
+    <h2>Lista de Responsabilidades do Retalhista {{ params.get("name") }}</h2>
+    <a href="addresponsabilities?name={{ params.get('name') }}" role="button"
+      >Adicionar Responsabilidade</a
+    >
     <br />
     <br />
     <table>
       <thead>
         <tr>
-          <th>TIN</th>
-          <th>Nome</th>
-          <th>Responsabilidades</th>
-          <th>Apagar</th>
+          <th>Categoria</th>
+          <th><abbr title="Número">Núm.</abbr> Série</th>
+          <th>Fabricante</th>
         </tr>
       </thead>
       <tbody>
         {% for record in cursor %}
         <tr>
-          <td>{{ record[0] }}</td>
           <td>{{ record[1] }}</td>
-          <td>
-            <a href="responsabilities?name={{ record[1] }}" role="button"
-              >Ver Responsabilidades
-            </a>
-          </td>
-          <td>
-            <a
-              href="deleteretailer?name={{ record[1] }}"
-              role="button"
-              class="contrast"
-              >Apagar Retalhista
-            </a>
-          </td>
+          <td>{{ record[2] }}</td>
+          <td>{{ record[3] }}</td>
         </tr>
         {% endfor %}
       </tbody>
