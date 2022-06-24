@@ -3,7 +3,7 @@
 SELECT dia_semana, concelho, SUM(unidades)
 	FROM Vendas
 	WHERE make_date(ano :: int, mes :: int, dia_mes :: int)
-		BETWEEN make_date(2019, 01, 01) AND make_date(2023, 12, 31)
+		BETWEEN make_date(2020, 01, 01) AND make_date(2021, 12, 31)
 	GROUP BY GROUPING SETS (dia_semana, concelho, ());
 
 /* 2. num dado distrito (i.e. "Lisboa"), por concelho, categoria, dia da semana e no total */
