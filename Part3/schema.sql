@@ -27,8 +27,7 @@ CREATE TABLE IF NOT EXISTS super_categoria (
 
 CREATE TABLE IF NOT EXISTS tem_outra (
 	super_categoria VARCHAR(255) NOT NULL REFERENCES super_categoria(nome),
-	categoria VARCHAR(255) PRIMARY KEY REFERENCES categoria(nome),
-	CHECK (super_categoria <> categoria)
+	categoria VARCHAR(255) PRIMARY KEY REFERENCES categoria(nome)
 );
 
 CREATE TABLE IF NOT EXISTS produto (

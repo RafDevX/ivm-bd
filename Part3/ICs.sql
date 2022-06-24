@@ -1,3 +1,20 @@
+/* RI-1: Uma Categoria não pode estar contida em si própria */
+CREATE OR REPLACE FUNCTION chk_cat_owns_self() RETURNS TRIGGER AS
+$$
+BEGIN 
+  IF NEW.super_categoria = NEW.categoria THEN
+    RAISE EXCEPTION 'A category cant have itself';
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_cat_owns_self ON tem_outra;
+CREATE TRIGGER trigger_cat_owns_self
+  BEFORE UPDATE OR INSERT ON tem_outra
+  FOR EACH ROW EXECUTE PROCEDURE chk_cat_owns_self();
+
 /* RI-4: O número de unidades repostas num evento de reposição não pode exceder o número de unidades especificado no planograma */
 CREATE OR REPLACE FUNCTION chk_oversupply() RETURNS TRIGGER AS
 $$
