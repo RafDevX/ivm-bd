@@ -3,7 +3,7 @@ DROP VIEW IF EXISTS Vendas;
 CREATE VIEW Vendas(ean, cat, ano, trimestre, mes, dia_mes, dia_semana, distrito, concelho, unidades) AS
 	SELECT
 		er.ean,
-		er.nome,
+		er.cat,
 		EXTRACT(YEAR FROM er.instante),
 		EXTRACT(QUARTER FROM er.instante),
 		EXTRACT(MONTH FROM er.instante),
@@ -15,6 +15,6 @@ CREATE VIEW Vendas(ean, cat, ano, trimestre, mes, dia_mes, dia_semana, distrito,
 	FROM (
 		evento_reposicao
 		NATURAL JOIN instalada_em
-		NATURAL JOIN tem_categoria
+		NATURAL JOIN produto
 	) AS er
 	INNER JOIN ponto_de_retalho AS pr ON er.local = pr.nome;
