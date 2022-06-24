@@ -26,11 +26,9 @@
           placeholder="Nome"
           name="category"
           id="category"
+          maxlength="255"
           oninput="checkName()"
         />
-        <p style="color: red; display: none" id="warning_name">
-          O nome pode ter no máximo 50 caracteres!
-        </p>
       </div>
       <br />
       <p>
@@ -41,6 +39,7 @@
             name="subswitch"
             role="switch"
             onchange="checkOption()"
+            maxlength="50"
           />
           Sub-categoria
         </label>
@@ -70,9 +69,7 @@
     function checkName() {
       const category = document.getElementById("category");
       const submit = document.getElementById("submit");
-      const warning_name = document.getElementById("warning_name");
-      if (category.value.length > 50 || category.value.length == 0) {
-        warning_name.style.display = "initial";
+      if (category.value.length == 0) {
         submit.disabled = true;
       } else {
         warning_name.style.display = "none";

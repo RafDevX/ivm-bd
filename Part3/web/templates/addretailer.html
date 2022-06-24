@@ -25,11 +25,9 @@
           placeholder="Nome"
           id="name"
           name="name"
+          maxlength="50"
           oninput="checkOption()"
         />
-        <p style="color: red; display: none" id="warning_name">
-          O nome pode ter no máximo 50 caracteres!
-        </p>
       </div>
       <div>
         <input
@@ -37,6 +35,7 @@
           placeholder="TIN"
           id="tin"
           name="tin"
+          maxlength="9"
           oninput="checkOption()"
         />
         <p style="display: initial" id="warning_tin">
@@ -53,7 +52,6 @@
   </body>
   <script>
     function checkOption() {
-      const warning_name = document.getElementById("warning_name");
       const warning_tin = document.getElementById("warning_tin");
       const warning_digits = document.getElementById("warning_digits");
       const name = document.getElementById("name");
@@ -63,16 +61,12 @@
       let check1,
         check2,
         check3 = false;
-      if (name.value.length > 50) {
-        warning_name.style.display = "initial";
-        check1 = false;
-      } else if (name.value.length == 0) {
+      if (name.value.length == 0) {
         check1 = false;
       } else {
-        warning_name.style.display = "none";
         check1 = true;
       }
-      if (tin.value.length != 9) {
+      if (tin.value.length < 9) {
         warning_tin.style.display = "initial";
         check2 = false;
       } else {
