@@ -83,3 +83,19 @@ DROP TRIGGER IF EXISTS trigger_remove_cat_deps ON categoria;
 CREATE TRIGGER trigger_remove_cat_deps
 	BEFORE DELETE ON categoria
 	FOR EACH ROW EXECUTE PROCEDURE remove_cat_deps();
+
+/* Quando um retailer é apagado, apagar tudo o que deptende dele */
+
+CREATE OR REPLACE FUNCTION remove_retailer_deps() RETURNS TRIGGER AS
+$$
+BEGIN
+  DELETE FROM responsavel_por WHERE tin = OLD.tin;
+  DELETE FROM evento_reposicao WHERE tin = OLD.tin;
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_remove_retailer_deps ON retalhista;
+CREATE TRIGGER trigger_remove_retailer_deps
+	BEFORE DELETE ON retalhista
+	FOR EACH ROW EXECUTE PROCEDURE remove_retailer_deps();
