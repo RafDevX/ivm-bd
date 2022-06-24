@@ -67,6 +67,21 @@ CREATE TRIGGER trigger_add_cat_rel
 	AFTER UPDATE OR INSERT ON produto
 	FOR EACH ROW EXECUTE PROCEDURE add_cat_rel();
 
+/* Quando uma categoria é criada, adicionar às categorias simples */
+
+CREATE OR REPLACE FUNCTION add_new_cat() RETURNS TRIGGER AS
+$$
+BEGIN
+  INSERT INTO categoria_simples(nome) VALUES (NEW.nome);
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_add_new_cat ON categoria;
+CREATE TRIGGER trigger_add_new_cat
+  AFTER UPDATE OR INSERT ON categoria
+  FOR EACH ROW EXECUTE PROCEDURE add_new_cat();
+
 /* Quando uma categoria é apagada, apagar tudo o que depende dela */
 
 CREATE OR REPLACE FUNCTION remove_cat_deps() RETURNS TRIGGER AS
